@@ -36,9 +36,9 @@ button{font-family:var(--ff-ui);cursor:none}
 .login-box::after{bottom:12px;right:12px;border-width:0 1px 1px 0}
 .login-mono{font-family:var(--ff-ser);font-style:italic;font-weight:300;font-size:1.8rem;color:var(--gold);letter-spacing:.04em;line-height:1.1;margin-bottom:.4rem}
 .login-sub{font-family:var(--ff-ui);font-size:.6rem;letter-spacing:.4em;text-transform:uppercase;color:rgba(247,242,232,.3);margin-bottom:2.5rem;display:block}
-.login-box input{width:100%;padding:.9rem 1rem;margin-bottom:.8rem;background:rgba(255,255,255,.04);border:1px solid rgba(196,165,90,.2);color:var(--cream);font-family:var(--ff-ui);font-size:.85rem;letter-spacing:.12em;outline:none;transition:border-color .3s;text-align:center}
-.login-box input::placeholder{color:rgba(255,255,255,.15);letter-spacing:.1em}
-.login-box input:focus{border-color:var(--gold)}
+.login-box input{width:100%;padding:.9rem 1rem;margin-bottom:.8rem;background:rgba(255,255,255,.08);border:1px solid rgba(196,165,90,.55);color:var(--cream);font-family:var(--ff-ui);font-size:.95rem;letter-spacing:.18em;outline:none;transition:border-color .3s,background .3s;text-align:center}
+.login-box input::placeholder{color:rgba(255,255,255,.4);letter-spacing:.1em}
+.login-box input:focus{border-color:var(--gold);background:rgba(255,255,255,.12)}
 .login-err{color:#c0392b;font-family:var(--ff-ui);font-size:.7rem;margin-top:.6rem;display:none;letter-spacing:.05em}
 
 /* ── NAV ── */
@@ -345,7 +345,7 @@ footer p{font-family:var(--ff-ui);font-size:.68rem;color:var(--sage);letter-spac
 <div id="login">
   <div class="login-box">
     <div class="login-mono">Fernando &amp; Daniel</div>
-    <span class="login-sub">28 · Mayo · 2027</span>
+    <span class="login-sub">Acceso privado</span>
     <input type="password" id="lp" placeholder="Contraseña" autocomplete="off">
     <button class="btn-primary" onclick="doLogin()" style="background:transparent;border:1px solid var(--gold);color:var(--gold);padding:.85rem 2rem;font-family:var(--ff-ui);font-size:.65rem;font-weight:400;letter-spacing:.32em;text-transform:uppercase;cursor:pointer;width:100%;margin-top:.2rem;transition:all .3s">Acceder</button>
     <p class="login-err" id="lerr">Contraseña incorrecta</p>
