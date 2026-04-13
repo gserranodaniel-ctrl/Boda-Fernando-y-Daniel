@@ -77,27 +77,26 @@ button{font-family:var(--ff-ui);cursor:none}
   position:relative;z-index:2;
   max-width:800px;
   text-align:left;
+  opacity:0;
 }
 .hero-h1{
   font-family:var(--ff-ser);font-size:clamp(4.5rem,12vw,10rem);
   font-weight:300;color:var(--white);line-height:.88;letter-spacing:-.01em;
   overflow:hidden;margin-bottom:2rem;
 }
-.hero-h1 .ln{display:block;transform:translateY(112%)}
+.hero-h1 .ln{display:block}
 .hero-h1 .amp{font-style:italic;color:var(--gold)}
 .hero-meta{display:flex;flex-direction:column;gap:1rem;margin-bottom:2.5rem}
 .hero-ceremony{
   font-family:var(--ff-ui);font-size:.65rem;letter-spacing:.35em;
   text-transform:uppercase;color:rgba(255,255,255,.38);
-  opacity:0;
 }
 .hero-dateline{
   font-family:var(--ff-ser);font-size:clamp(1rem,2.2vw,1.4rem);
   font-weight:300;color:var(--cream);letter-spacing:.12em;
-  opacity:0;
 }
 /* countdown left-aligned */
-.countdown{display:flex;gap:0;opacity:0;align-items:flex-start}
+.countdown{display:flex;gap:0;align-items:flex-start}
 .cd-item{text-align:center;padding:0 1.8rem 0 0;position:relative}
 .cd-item:not(:last-child){padding-right:1.8rem;margin-right:0}
 .cd-item:not(:last-child)::after{content:'·';position:absolute;right:-.1rem;top:.2rem;color:rgba(196,164,74,.4);font-family:var(--ff-ser);font-size:2rem}
@@ -123,10 +122,10 @@ button{font-family:var(--ff-ui);cursor:none}
 .story-block.flip{direction:rtl}
 .story-block.flip>*{direction:ltr}
 .story-sticky{position:sticky;top:0;height:100vh;display:flex;align-items:center;justify-content:center;padding:2.5rem;overflow:hidden}
-.img-box{width:100%;max-width:280px;aspect-ratio:3/4;overflow:hidden;position:relative}
+.img-box{width:100%;max-width:360px;aspect-ratio:3/4;overflow:hidden;position:relative}
 .img-box img{width:100%;height:100%;object-fit:cover;filter:grayscale(8%) contrast(1.04);transition:transform .7s;cursor:zoom-in}
 .img-box:hover img{transform:scale(1.04)}
-.img-ph{width:100%;max-width:280px;aspect-ratio:3/4;position:relative;overflow:hidden}
+.img-ph{width:100%;max-width:360px;aspect-ratio:3/4;position:relative;overflow:hidden}
 .ip1{background:linear-gradient(155deg,#1a2e1a,#2d4a2d)}
 .ip2{background:linear-gradient(155deg,#0e1e14,#1a3020)}
 .ip3{background:linear-gradient(155deg,#18281e,#243c2a)}
@@ -136,7 +135,7 @@ button{font-family:var(--ff-ui);cursor:none}
 .story-scroll-col.r{padding:7vh 2rem 7vh 2.5rem}
 .stu{opacity:0;transform:translateY(48px)}
 .s-tag-gold{font-family:var(--ff-ui);font-size:.55rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:.9rem}
-.s-headline{font-family:var(--ff-ser);font-style:italic;font-weight:300;font-size:clamp(2rem,3.8vw,4rem);line-height:.95;color:var(--td);margin-bottom:1.3rem}
+.s-headline{font-family:var(--ff-ser);font-style:italic;font-weight:300;font-size:clamp(2.4rem,4.5vw,5rem);line-height:.93;color:var(--td);margin-bottom:1.3rem}
 .s-body{font-family:var(--ff-eb);font-size:1rem;line-height:1.9;color:var(--tm);max-width:320px}
 .s-body strong{color:var(--td);font-weight:500}
 .s-firma{font-family:var(--ff-eb);font-style:italic;font-size:1rem;color:var(--ltgreen);margin-top:1.2rem}
@@ -297,7 +296,7 @@ footer p{font-family:var(--ff-ui);font-size:.68rem;color:var(--sage);letter-spac
 /* sticky 4-photo quad grid */
 .sticky-quad-grid{
   display:grid;grid-template-columns:1fr 1fr;gap:.4rem;
-  width:100%;max-width:340px;
+  width:100%;max-width:360px;
 }
 .sticky-quad-grid img{
   width:100%;aspect-ratio:1/1;object-fit:cover;
@@ -632,11 +631,11 @@ function initActiveSections(){
 
 /* ── HERO ── */
 function heroAnim(){
-  const tl=gsap.timeline({defaults:{ease:'expo.out'}});
-  tl.to(['#hL1','#hL2'],{y:'0%',stagger:.1,duration:1.6},0)
-    .to('#hCer',{opacity:1,duration:.9},.6)
-    .to('#hDate',{opacity:1,duration:.9},.8)
-    .to('#hCD',{opacity:1,duration:.9},1.1);
+  // All hero content appears as one block — no stagger
+  gsap.fromTo('.hero-content',
+    {opacity:0, y:18},
+    {opacity:1, y:0, duration:.9, ease:'power2.out'}
+  );
   gsap.to('.hero-glow',{yPercent:20,ease:'none',scrollTrigger:{trigger:'#hero',start:'top top',end:'bottom top',scrub:true}});
 }
 
