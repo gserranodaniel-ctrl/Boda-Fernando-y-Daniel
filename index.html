@@ -30,8 +30,8 @@ button{font-family:var(--ff-ui);cursor:none}
 
 /* ── LOGIN ── */
 #login{position:fixed;inset:0;z-index:9999;background:var(--dkgreen);display:flex;align-items:center;justify-content:center;overflow:hidden}
-#login-video{position:absolute;top:50%;left:50%;width:100%;height:100%;min-width:100%;min-height:100%;transform:translate(-50%,-50%);object-fit:cover;object-position:50% 10%;z-index:0;background:var(--dkgreen)}
-.login-video-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,10,6,.55) 0%,rgba(0,10,6,.72) 100%);z-index:1;pointer-events:none}
+#login-bg{position:absolute;top:50%;left:50%;width:100%;height:100%;min-width:100%;min-height:100%;transform:translate(-50%,-50%);object-fit:cover;object-position:50% 50%;z-index:0;background:var(--dkgreen)}
+.login-bg-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,10,6,.55) 0%,rgba(0,10,6,.72) 100%);z-index:1;pointer-events:none}
 .login-box{background:rgba(8,8,8,.86);padding:4rem 2.8rem;width:90%;max-width:420px;text-align:center;border:1px solid rgba(196,164,74,.35);position:relative;z-index:2;backdrop-filter:blur(2px)}
 .login-box::before,.login-box::after{content:'';position:absolute;width:38px;height:38px;border-color:var(--gold);border-style:solid}
 .login-box::before{top:12px;left:12px;border-width:1px 0 0 1px}
@@ -350,11 +350,9 @@ footer p{font-family:var(--ff-ui);font-size:.68rem;color:var(--sage);letter-spac
 
 <!-- ── LOGIN ── -->
 <div id="login">
-  <!-- Vídeo de fondo servido directamente desde el repositorio de GitHub (raw.githubusercontent.com) -->
-  <video id="login-video" autoplay muted loop playsinline preload="auto" crossorigin="anonymous">
-    <source src="https://raw.githubusercontent.com/gserranodaniel-ctrl/Boda-Fernando-y-Daniel/main/Web%20Intro%20Video.mp4" type="video/mp4">
-  </video>
-  <div class="login-video-overlay"></div>
+  <!-- Imagen de fondo servida directamente desde el repositorio de GitHub (raw.githubusercontent.com) -->
+  <img id="login-bg" src="https://raw.githubusercontent.com/gserranodaniel-ctrl/Boda-Fernando-y-Daniel/main/Foto-inicial.png" alt="">
+  <div class="login-bg-overlay"></div>
   <div class="login-box">
     <div class="login-mono">Fernando &amp; Daniel</div>
     <span class="login-sub">Acceso privado</span>
@@ -614,14 +612,8 @@ const PWD='BodaF&D_2027';
 window.onload=()=>{
   document.getElementById('lp').addEventListener('keydown',e=>{if(e.key==='Enter')doLogin();});
 
-  // Intenta forzar la reproducción del vídeo de fondo (algunos navegadores
-  // requieren una llamada explícita a play() aunque el vídeo esté silenciado)
-  const lv=document.getElementById('login-video');
-  if(lv){ lv.play().catch(()=>{ /* si falla, se queda el fondo verde oscuro de respaldo */ }); }
-
   if(sessionStorage.getItem('boda_auth')==='1'){
     document.getElementById('login').style.display='none';
-    if(lv) lv.pause();
     boot();
   }
 };
@@ -635,8 +627,6 @@ function doLogin(){
     login.style.opacity='0';
     setTimeout(()=>{
       login.style.display='none';
-      const lv=document.getElementById('login-video');
-      if(lv) lv.pause(); // libera recursos una vez dentro de la web
       boot();
     },500);
   } else {
