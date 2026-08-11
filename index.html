@@ -350,8 +350,18 @@ button{font-family:var(--ff-ui);cursor:none}
 
 .form-foot{text-align:center;margin-top:2rem}
 /* ── JOTFORM EMBED ── */
-.jotform-wrap{max-width:640px;margin:0 auto}
-.jotform-wrap iframe,.jotform-wrap form{width:100%!important;background:transparent!important}
+.jotform-wrap{
+  max-width:640px;margin:0 auto;
+  background:var(--off);padding:1.2rem 1rem 1rem;
+  border:1px solid rgba(196,164,74,.28);
+}
+.jotform-wrap iframe{width:100%!important;border:none;display:block;background:transparent}
+.jf-fallback{
+  font-family:var(--ff-ui);font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;
+  text-align:center;color:var(--tm);margin-top:1rem;padding-top:.9rem;
+  border-top:1px solid rgba(0,51,32,.12);line-height:1.9;
+}
+.jf-fallback a{color:var(--midgreen);border-bottom:1px solid rgba(0,51,32,.3)}
 #rsvp-ok{display:none;text-align:center;max-width:640px;margin:0 auto;padding:3rem 2.5rem;background:var(--off);position:relative}
 #rsvp-ok::before,#rsvp-ok::after{content:'';position:absolute;width:28px;height:28px;border-color:var(--gold);border-style:solid}
 #rsvp-ok::before{top:10px;left:10px;border-width:1px 0 0 1px}
@@ -712,9 +722,25 @@ footer p{font-family:var(--ff-ui);font-size:.68rem;color:var(--sage);letter-spac
       <h2>Confirma tu <em>asistencia</em></h2>
       <p class="rsvp-deadline">Por favor, confirma tu asistencia antes del <strong>1 de Abril de 2027</strong></p>
     </div>
-    <div class="jotform-wrap fi">
-      <script type="text/javascript" src="https://www.jotform.com/jsform/261023433093043"></script>
+    <div class="jotform-wrap">
+      <iframe
+        id="JotFormIFrame-261023433093043"
+        title="Confirmaci&oacute;n de asistencia"
+        allow="geolocation; microphone; camera; fullscreen"
+        src="https://form.jotform.com/261023433093043"
+        style="min-width:100%;max-width:100%;height:1000px;border:none"
+        scrolling="no"></iframe>
+      <p class="jf-fallback">
+        &iquest;No se carga el formulario?<br>
+        <a href="https://form.jotform.com/261023433093043" target="_blank" rel="noopener">Abrirlo en una pesta&ntilde;a nueva &rarr;</a>
+      </p>
     </div>
+    <script src="https://cdn.jotfor.ms/s/umd/latest/for-form-embed-handler.js"></script>
+    <script>
+      if(window.jotformEmbedHandler){
+        window.jotformEmbedHandler("iframe[id='JotFormIFrame-261023433093043']","https://form.jotform.com");
+      }
+    </script>
   </div>
 </section>
 
