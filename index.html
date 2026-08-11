@@ -429,20 +429,28 @@ footer p{font-family:var(--ff-ui);font-size:.68rem;color:var(--sage);letter-spac
 .photo-banner{
   width:100vw;position:relative;left:50%;margin-left:-50vw;
   overflow:hidden;background:var(--dkgreen);
-  border-top:1px solid rgba(196,164,74,.15);
-  border-bottom:1px solid rgba(196,164,74,.15);
-  margin-top:2vh;
+  border-top:1px solid rgba(196,164,74,.22);
+  border-bottom:1px solid rgba(196,164,74,.22);
+  margin:4vh 0;                 /* mismo aire arriba y abajo */
+  height:clamp(115px,13vw,175px);  /* franja sutil */
+  /* line-height/font-size a 0: elimina el hueco de baseline bajo las fotos */
+  line-height:0;font-size:0;
 }
-.pb-track{display:inline-flex;white-space:nowrap;will-change:transform}
+.pb-track{
+  display:flex;height:100%;
+  white-space:nowrap;will-change:transform;
+  line-height:0;font-size:0;
+}
 .pb-track img{
-  height:clamp(180px,24vw,320px);width:auto;
-  object-fit:cover;flex-shrink:0;cursor:zoom-in;
-  margin-right:.4rem;
+  height:100%;width:auto;display:block;
+  object-fit:cover;object-position:50% 40%;
+  flex-shrink:0;cursor:zoom-in;
+  margin-right:3px;vertical-align:top;
   filter:grayscale(6%) contrast(1.03);
 }
 
 /* ── Bloque de informaci&oacute;n bajo el banner ── */
-.info-below{max-width:920px;margin:0 auto;padding:7vh 2rem 8vh;text-align:center}
+.info-below{max-width:920px;margin:0 auto;padding:4vh 2rem 8vh;text-align:center}
 .info-grid{
   display:grid;grid-template-columns:repeat(3,1fr);gap:.8rem;
   margin-top:2.2rem;text-align:left;
@@ -452,28 +460,13 @@ footer p{font-family:var(--ff-ui);font-size:.68rem;color:var(--sage);letter-spac
 .story-intro{max-width:640px;margin:0 auto;padding:9vh 2rem 4vh;text-align:center}
 .story-intro .s-body{max-width:100%;margin:0 auto}
 
-/* dc mixed photo grid */
-.dc-mixed-grid{
-  display:grid;
-  grid-template-columns:repeat(5,1fr);
-  gap:.4rem;
-  max-width:760px;margin:0 auto;
-}
-.dc-mixed-grid img{
-  width:100%;aspect-ratio:3/4;object-fit:cover;
-  cursor:zoom-in;
-  transition:transform .4s cubic-bezier(.16,1,.3,1);
-}
-.dc-mixed-grid img:hover{transform:scale(1.04)}
+
 @media(max-width:860px){
-  .dc-mixed-grid{grid-template-columns:repeat(3,1fr)}
   .story-intro{padding:6vh 1.5rem 1vh}
-  .info-below{padding:5vh 1.4rem 6vh}
+  .info-below{padding:3vh 1.4rem 6vh}
   .info-grid{grid-template-columns:1fr}
 }
-@media(max-width:480px){
-  .dc-mixed-grid{grid-template-columns:repeat(2,1fr)}
-}
+
 </style>
 </head>
 <body>
@@ -518,11 +511,11 @@ footer p{font-family:var(--ff-ui);font-size:.68rem;color:var(--sage);letter-spac
 
 <!-- ── HERO ── -->
 <section id="hero">
-  <!-- Vídeo de fondo. Debe estar en la MISMA carpeta que este HTML al subirlo a Netlify. -->
+  <!-- Vídeo de fondo: Puedes_hacerlos_bailar_pero_si.mp4 — debe estar en la MISMA carpeta que este HTML. -->
   <video id="hero-video"
          autoplay muted loop playsinline preload="auto"
          poster="https://raw.githubusercontent.com/gserranodaniel-ctrl/Boda-Fernando-y-Daniel/main/Foto-inicial.png"
-         src="Puedes_ahora_animarlo_para_que.mp4"></video>
+         src="Puedes_hacerlos_bailar_pero_si.mp4"></video>
   <div class="hero-veil"></div>
   <div class="hero-glow"></div>
   <div class="hero-grain"></div>
@@ -613,7 +606,7 @@ footer p{font-family:var(--ff-ui);font-size:.68rem;color:var(--sage);letter-spac
 
   <!-- Bloque 3b: banner de fotos a todo el ancho -->
   <div class="photo-banner">
-    <div class="pb-track" id="pb-track">
+    <div class="pb-track" id="pb-track" data-copies="3">
       <img src="Fiesta0.jpeg" alt="" onclick="openLb(this.src)">
       <img src="Fiesta3.jpeg" alt="" onclick="openLb(this.src)">
       <img src="Fiesta2.jpeg" alt="" onclick="openLb(this.src)">
@@ -675,8 +668,18 @@ footer p{font-family:var(--ff-ui);font-size:.68rem;color:var(--sage);letter-spac
     </div>
     <p class="dc-wilde fi" style="margin-bottom:2.5rem">Como recordaba Oscar Wilde: <em>«Uno debería estar siempre un poco demasiado bien vestido».</em></p>
 
-    <div class="dc-gallery fi">
-      <div class="dc-mixed-grid">
+    <div class="photo-banner">
+      <div class="pb-track" id="dc-track" data-copies="2">
+        <img src="Ambos0.jpeg" alt="Look" onclick="openLb(this.src)">
+        <img src="Ambos1.jpeg" alt="Look" onclick="openLb(this.src)">
+        <img src="Hombres0.jpeg" alt="Look" onclick="openLb(this.src)">
+        <img src="Ellas1.jpeg" alt="Look" onclick="openLb(this.src)">
+        <img src="Ambos2.jpeg" alt="Look" onclick="openLb(this.src)">
+        <img src="Ellas2.jpeg" alt="Look" onclick="openLb(this.src)">
+        <img src="Hombres1.jpeg" alt="Look" onclick="openLb(this.src)">
+        <img src="Ellas3.jpeg" alt="Look" onclick="openLb(this.src)">
+        <img src="Ellas4.jpeg" alt="Look" onclick="openLb(this.src)">
+        <img src="Ellas5.jpeg" alt="Look" onclick="openLb(this.src)">
         <img src="Ambos0.jpeg" alt="Look" onclick="openLb(this.src)">
         <img src="Ambos1.jpeg" alt="Look" onclick="openLb(this.src)">
         <img src="Hombres0.jpeg" alt="Look" onclick="openLb(this.src)">
@@ -763,7 +766,8 @@ function doLogin(){
 
 function boot(){
   initHeroVideo();
-  initPhotoBanner();
+  initPhotoBanner('pb-track',42);
+  initPhotoBanner('dc-track',70);
   initCursor();
   initNav();
   heroAnim();
@@ -786,15 +790,16 @@ function initHeroVideo(){
   v.addEventListener('pause',()=>{if(!document.hidden)play();});
 }
 
-/* ── BANNER DE FOTOS ── */
-function initPhotoBanner(){
-  const el=document.getElementById('pb-track');
+/* ── BANNERS DE FOTOS ── */
+function initPhotoBanner(id,duration){
+  const el=document.getElementById(id);
   if(!el||typeof gsap==='undefined')return;
+  const copies=parseInt(el.dataset.copies||'3',10);
 
   function run(){
-    const w=el.scrollWidth/3;          // 3 copias de la secuencia
+    const w=el.scrollWidth/copies;     // ancho de una secuencia completa
     if(!w)return;
-    gsap.to(el,{x:-w,duration:40,ease:'none',repeat:-1,
+    gsap.to(el,{x:-w,duration:duration||40,ease:'none',repeat:-1,
       modifiers:{x:gsap.utils.unitize(x=>parseFloat(x)%w)}});
   }
 
