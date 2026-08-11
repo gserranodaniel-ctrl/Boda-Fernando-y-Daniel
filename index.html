@@ -116,6 +116,20 @@ button{font-family:var(--ff-ui);cursor:none}
 .cd-num{font-family:var(--ff-ser);font-size:clamp(2rem,4.5vw,3.5rem);font-weight:300;color:var(--white);display:block;line-height:1}
 .cd-lbl{font-family:var(--ff-ui);font-size:.5rem;letter-spacing:.22em;text-transform:uppercase;color:var(--sage);margin-top:.4rem;display:block}
 
+/* ── HERO VIDEO ── */
+#hero-video{
+  position:absolute;inset:0;width:100%;height:100%;
+  object-fit:cover;object-position:50% 45%;
+  z-index:0;pointer-events:none;background:var(--black);
+}
+.hero-veil{
+  position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:linear-gradient(180deg,rgba(0,0,0,.30) 0%,rgba(0,0,0,.45) 50%,rgba(0,0,0,.85) 100%);
+}
+.hero-glow,.hero-grain{z-index:1}
+.hero-content{z-index:3}
+@media (prefers-reduced-motion:reduce){#hero-video{display:none}}
+
 /* ── SHARED ── */
 .s-label{font-family:var(--ff-ui);font-size:.6rem;letter-spacing:.45em;text-transform:uppercase;color:var(--gold);display:block;text-align:center;margin-bottom:1rem}
 .s-title{font-family:var(--ff-ser);font-size:clamp(2.4rem,5vw,3.8rem);font-weight:300;text-align:center;line-height:1.05}
@@ -378,6 +392,12 @@ footer p{font-family:var(--ff-ui);font-size:.68rem;color:var(--sage);letter-spac
 
 <!-- ── HERO ── -->
 <section id="hero">
+  <!-- Vídeo de fondo. Debe estar en la MISMA carpeta que este HTML al subirlo a Netlify. -->
+  <video id="hero-video"
+         autoplay muted loop playsinline preload="auto"
+         poster="https://raw.githubusercontent.com/gserranodaniel-ctrl/Boda-Fernando-y-Daniel/main/Foto-inicial.png"
+         src="Puedes_ahora_animarlo_para_que.mp4"></video>
+  <div class="hero-veil"></div>
   <div class="hero-glow"></div>
   <div class="hero-grain"></div>
   <div class="hero-content">
@@ -637,6 +657,7 @@ function doLogin(){
 }
 
 function boot(){
+  initHeroVideo();
   initCursor();
   initNav();
   heroAnim();
@@ -645,6 +666,18 @@ function boot(){
   initStory();
   initFadeIn();
   initActiveSections();
+}
+
+/* ── HERO VIDEO ── */
+function initHeroVideo(){
+  const v=document.getElementById('hero-video');
+  if(!v)return;
+  v.muted=true;                       // obligatorio para el autoplay
+  const play=()=>{const p=v.play();if(p)p.catch(()=>{});};
+  play();
+  // Safari/iOS suelen pausar el vídeo al cambiar de pestaña o volver de background
+  document.addEventListener('visibilitychange',()=>{if(!document.hidden)play();});
+  v.addEventListener('pause',()=>{if(!document.hidden)play();});
 }
 
 /* ── CURSOR ── */
