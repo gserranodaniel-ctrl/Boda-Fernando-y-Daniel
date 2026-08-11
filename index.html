@@ -70,16 +70,16 @@ button{font-family:var(--ff-ui);cursor:none}
   margin-bottom:.7rem;
 }
 .inv-names .amp{color:var(--gold)}
-.inv-lede strong{font-weight:500;color:var(--dkgreen);letter-spacing:.01em}
+.inv-date{
+  font-family:var(--ff-ui);font-size:.6rem;font-weight:400;
+  letter-spacing:.3em;text-transform:uppercase;color:var(--midgreen);
+  margin-top:1rem;
+}
 .inv-lede{
   font-family:var(--ff-eb);font-size:.98rem;line-height:1.65;color:var(--tm);
   max-width:270px;margin:0 auto;
 }
 .inv-gate{margin-top:1.6rem;padding-top:1.5rem;border-top:1px solid rgba(0,51,32,.14)}
-.inv-gate-help{
-  font-family:var(--ff-eb);font-style:italic;font-size:.86rem;color:var(--tm);
-  line-height:1.5;margin-bottom:.9rem;
-}
 .login-box input{
   width:100%;padding:.8rem 1rem;margin-bottom:.6rem;
   background:rgba(255,255,255,.72);border:1px solid rgba(0,51,32,.22);
@@ -113,13 +113,18 @@ button{font-family:var(--ff-ui);cursor:none}
 }
 #std-bar span{
   font-family:var(--ff-ui);font-size:.55rem;font-weight:400;
-  letter-spacing:.32em;text-transform:uppercase;color:var(--gold);
-  text-align:center;padding:0 1rem;white-space:nowrap;
-  overflow:hidden;text-overflow:ellipsis;
+  letter-spacing:.3em;text-transform:uppercase;color:var(--gold);
+  text-align:center;width:100%;padding:0 .8rem;
+  white-space:nowrap;line-height:1;
 }
 @media(max-width:640px){
-  :root{--std-h:30px}
-  #std-bar span{font-size:.46rem;letter-spacing:.2em}
+  :root{--std-h:32px}
+  /* el letter-spacing deja un hueco tras el ultimo caracter: se compensa
+     con algo mas de padding a la izquierda para centrar de verdad */
+  #std-bar span{font-size:.44rem;letter-spacing:.16em;padding:0 .5rem 0 .66rem}
+}
+@media(max-width:360px){
+  #std-bar span{font-size:.4rem;letter-spacing:.1em}
 }
 
 /* ── NAV ── */
@@ -401,7 +406,14 @@ footer p{font-family:var(--ff-ui);font-size:.68rem;color:var(--sage);letter-spac
   .dc-cols{grid-template-columns:1fr}
   .dc-col:first-child{border-bottom:1px solid rgba(10,18,10,.12)}
   .swatches{grid-template-columns:repeat(3,1fr)}
-  nav{padding:1.1rem 1.5rem}
+  #nav{
+    padding:.6rem 1.1rem;
+    background:rgba(8,8,8,.6);backdrop-filter:blur(8px);
+    border-bottom:1px solid rgba(196,164,74,.12);
+  }
+  #nav.solid{background:rgba(8,8,8,.97)}
+  .hamburger{padding:.42rem .48rem;gap:3.5px}
+  .hamburger span{width:18px}
   .nav-ul{display:none;flex-direction:column;position:absolute;top:100%;left:0;width:100%;background:rgba(8,8,8,.98);padding:1.5rem;gap:1.2rem;border-bottom:1px solid rgba(196,164,74,.2)}
   .nav-ul.open{display:flex}
   .hamburger{display:flex}
@@ -431,7 +443,8 @@ footer p{font-family:var(--ff-ui);font-size:.68rem;color:var(--sage);letter-spac
   overflow:hidden;background:var(--dkgreen);
   border-top:1px solid rgba(196,164,74,.22);
   border-bottom:1px solid rgba(196,164,74,.22);
-  margin:4vh 0;                 /* mismo aire arriba y abajo */
+  /* OJO: nunca usar el atajo 'margin' aqui, anularia el margin-left:-50vw */
+  margin-top:4vh;margin-bottom:4vh;margin-right:0;
   height:clamp(115px,13vw,175px);  /* franja sutil */
   /* line-height/font-size a 0: elimina el hueco de baseline bajo las fotos */
   line-height:0;font-size:0;
@@ -482,10 +495,10 @@ footer p{font-family:var(--ff-ui);font-size:.68rem;color:var(--sage);letter-spac
   <div class="login-box">
     <div class="inv-seal">F&amp;D</div>
     <div class="inv-names">Fernando <span class="amp">&amp;</span> Daniel</div>
-    <p class="inv-lede">tenemos el placer de invitarles el<br><strong>28 de mayo de 2027</strong></p>
+    <p class="inv-lede">tienen el honor de invitarle<br>a la celebración de su enlace</p>
+    <p class="inv-date">28 de mayo de 2027</p>
 
     <div class="inv-gate">
-      <p class="inv-gate-help">Para más detalles, accede con la contraseña proporcionada.</p>
       <input type="password" id="lp" placeholder="Contraseña" autocomplete="off">
       <button class="btn-invite" onclick="doLogin()">Abrir la invitación</button>
       <p class="login-err" id="lerr">La contraseña no es correcta</p>
