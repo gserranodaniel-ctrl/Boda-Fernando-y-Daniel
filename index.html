@@ -118,13 +118,13 @@ button{font-family:var(--ff-ui);cursor:none}
   white-space:nowrap;line-height:1;
 }
 @media(max-width:640px){
-  :root{--std-h:32px}
+  :root{--std-h:36px}
   /* el letter-spacing deja un hueco tras el ultimo caracter: se compensa
      con algo mas de padding a la izquierda para centrar de verdad */
-  #std-bar span{font-size:.44rem;letter-spacing:.16em;padding:0 .5rem 0 .66rem}
+  #std-bar span{font-size:.58rem;letter-spacing:.12em;padding:0 .5rem 0 .62rem}
 }
 @media(max-width:360px){
-  #std-bar span{font-size:.4rem;letter-spacing:.1em}
+  #std-bar span{font-size:.52rem;letter-spacing:.07em}
 }
 
 /* ── NAV ── */
@@ -406,14 +406,15 @@ footer p{font-family:var(--ff-ui);font-size:.68rem;color:var(--sage);letter-spac
   .dc-cols{grid-template-columns:1fr}
   .dc-col:first-child{border-bottom:1px solid rgba(10,18,10,.12)}
   .swatches{grid-template-columns:repeat(3,1fr)}
+  /* barra dorada + nav forman una sola cabecera continua */
   #nav{
-    padding:.6rem 1.1rem;
-    background:rgba(8,8,8,.6);backdrop-filter:blur(8px);
-    border-bottom:1px solid rgba(196,164,74,.12);
+    padding:.55rem 1rem;
+    background:var(--dkgreen);
+    border-bottom:1px solid rgba(196,164,74,.2);
   }
-  #nav.solid{background:rgba(8,8,8,.97)}
-  .hamburger{padding:.42rem .48rem;gap:3.5px}
-  .hamburger span{width:18px}
+  #nav.solid{background:var(--dkgreen)}
+  .hamburger{padding:.5rem .55rem;gap:4px;background:transparent}
+  .hamburger span{width:21px;height:2px}
   .nav-ul{display:none;flex-direction:column;position:absolute;top:100%;left:0;width:100%;background:rgba(8,8,8,.98);padding:1.5rem;gap:1.2rem;border-bottom:1px solid rgba(196,164,74,.2)}
   .nav-ul.open{display:flex}
   .hamburger{display:flex}
@@ -619,15 +620,7 @@ footer p{font-family:var(--ff-ui);font-size:.68rem;color:var(--sage);letter-spac
 
   <!-- Bloque 3b: banner de fotos a todo el ancho -->
   <div class="photo-banner">
-    <div class="pb-track" id="pb-track" data-copies="3">
-      <img src="Fiesta0.jpeg" alt="" onclick="openLb(this.src)">
-      <img src="Fiesta3.jpeg" alt="" onclick="openLb(this.src)">
-      <img src="Fiesta2.jpeg" alt="" onclick="openLb(this.src)">
-      <img src="Fiesta1.jpeg" alt="" onclick="openLb(this.src)">
-      <img src="Fiesta0.jpeg" alt="" onclick="openLb(this.src)">
-      <img src="Fiesta3.jpeg" alt="" onclick="openLb(this.src)">
-      <img src="Fiesta2.jpeg" alt="" onclick="openLb(this.src)">
-      <img src="Fiesta1.jpeg" alt="" onclick="openLb(this.src)">
+    <div class="pb-track" id="pb-track">
       <img src="Fiesta0.jpeg" alt="" onclick="openLb(this.src)">
       <img src="Fiesta3.jpeg" alt="" onclick="openLb(this.src)">
       <img src="Fiesta2.jpeg" alt="" onclick="openLb(this.src)">
@@ -682,17 +675,7 @@ footer p{font-family:var(--ff-ui);font-size:.68rem;color:var(--sage);letter-spac
     <p class="dc-wilde fi" style="margin-bottom:2.5rem">Como recordaba Oscar Wilde: <em>«Uno debería estar siempre un poco demasiado bien vestido».</em></p>
 
     <div class="photo-banner">
-      <div class="pb-track" id="dc-track" data-copies="2">
-        <img src="Ambos0.jpeg" alt="Look" onclick="openLb(this.src)">
-        <img src="Ambos1.jpeg" alt="Look" onclick="openLb(this.src)">
-        <img src="Hombres0.jpeg" alt="Look" onclick="openLb(this.src)">
-        <img src="Ellas1.jpeg" alt="Look" onclick="openLb(this.src)">
-        <img src="Ambos2.jpeg" alt="Look" onclick="openLb(this.src)">
-        <img src="Ellas2.jpeg" alt="Look" onclick="openLb(this.src)">
-        <img src="Hombres1.jpeg" alt="Look" onclick="openLb(this.src)">
-        <img src="Ellas3.jpeg" alt="Look" onclick="openLb(this.src)">
-        <img src="Ellas4.jpeg" alt="Look" onclick="openLb(this.src)">
-        <img src="Ellas5.jpeg" alt="Look" onclick="openLb(this.src)">
+      <div class="pb-track" id="dc-track">
         <img src="Ambos0.jpeg" alt="Look" onclick="openLb(this.src)">
         <img src="Ambos1.jpeg" alt="Look" onclick="openLb(this.src)">
         <img src="Hombres0.jpeg" alt="Look" onclick="openLb(this.src)">
@@ -804,28 +787,53 @@ function initHeroVideo(){
 }
 
 /* ── BANNERS DE FOTOS ── */
+/* El bucle desplaza la tira como maximo el ancho de UNA secuencia. Para que no
+   quede hueco a la derecha hacen falta copias suficientes para cubrir la
+   pantalla mas ese desplazamiento: (copias-1) * secuencia >= ancho ventana.
+   Por eso las copias se calculan en ejecucion y no van fijas en el HTML. */
 function initPhotoBanner(id,duration){
   const el=document.getElementById(id);
   if(!el||typeof gsap==='undefined')return;
-  const copies=parseInt(el.dataset.copies||'3',10);
+  const base=Array.prototype.slice.call(el.children);
+  if(!base.length)return;
 
-  function run(){
-    const w=el.scrollWidth/copies;     // ancho de una secuencia completa
-    if(!w)return;
-    gsap.to(el,{x:-w,duration:duration||40,ease:'none',repeat:-1,
-      modifiers:{x:gsap.utils.unitize(x=>parseFloat(x)%w)}});
+  let seq=0,copies=1,tween=null;
+
+  function ensureCopies(){
+    if(!seq)return;
+    const need=Math.max(2,Math.ceil(window.innerWidth/seq)+1);
+    while(copies<need){
+      base.forEach(n=>el.appendChild(n.cloneNode(true)));
+      copies++;
+    }
   }
 
-  // Arrancar solo cuando las im&aacute;genes tengan dimensiones reales
-  const imgs=Array.prototype.slice.call(el.querySelectorAll('img'));
-  let pending=imgs.filter(im=>!im.complete).length;
-  if(pending===0){run();return;}
-  imgs.forEach(im=>{
-    if(im.complete)return;
-    const done=()=>{if(--pending===0)run();};
-    im.addEventListener('load',done,{once:true});
-    im.addEventListener('error',done,{once:true});
-  });
+  function start(){
+    seq=el.scrollWidth;              // ancho de una secuencia, antes de clonar
+    if(!seq)return;
+    ensureCopies();
+    if(tween)tween.kill();
+    tween=gsap.to(el,{x:-seq,duration:duration||40,ease:'none',repeat:-1,
+      modifiers:{x:gsap.utils.unitize(x=>parseFloat(x)%seq)}});
+  }
+
+  // Solo cuando las imagenes tengan dimensiones reales; si no, la medida falla
+  const imgs=base.filter(n=>n.tagName==='IMG');
+  let pending=imgs.filter(im=>!im.complete||!im.naturalWidth).length;
+  if(pending===0){start();}
+  else{
+    imgs.forEach(im=>{
+      if(im.complete&&im.naturalWidth)return;
+      const done=()=>{if(--pending===0)start();};
+      im.addEventListener('load',done,{once:true});
+      im.addEventListener('error',done,{once:true});
+    });
+  }
+
+  let rt;
+  window.addEventListener('resize',()=>{
+    clearTimeout(rt);rt=setTimeout(ensureCopies,200);
+  },{passive:true});
 }
 
 /* ── CURSOR ── */
