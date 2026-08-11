@@ -466,6 +466,9 @@ footer p{font-family:var(--ff-ui);font-size:.68rem;color:var(--sage);letter-spac
 .quad-grid img{
   width:100%;aspect-ratio:1/1;object-fit:cover;
   cursor:zoom-in;transition:transform .45s cubic-bezier(.16,1,.3,1);
+  /* mismo tratamiento en las cuatro: el contraste y el brillo compensan
+     que las fotos originales tienen exposiciones distintas */
+  filter:grayscale(100%) contrast(1.08) brightness(1.02);
 }
 .quad-grid img:hover{transform:scale(1.03)}
 
@@ -583,7 +586,7 @@ footer p{font-family:var(--ff-ui);font-size:.68rem;color:var(--sage);letter-spac
   <div class="story-block flip">
     <div class="story-sticky">
       <div class="img-box">
-        <img src="Castillo5.jpeg" alt="Castillo de Batres" onclick="openLb(this.src)">
+        <img src="castillo_web.jpeg" alt="Castillo de Batres" onclick="openLb(this.src)">
       </div>
     </div>
     <div class="story-scroll-col r">
