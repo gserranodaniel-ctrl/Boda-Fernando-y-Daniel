@@ -28,24 +28,103 @@ button{font-family:var(--ff-ui);cursor:none}
 #cur.big{width:30px;height:30px;background:transparent;border:1.5px solid var(--gold)}
 
 
-/* ── LOGIN ── */
-#login{position:fixed;inset:0;z-index:9999;background:var(--dkgreen);display:flex;align-items:center;justify-content:center;overflow:hidden}
-#login-bg{position:absolute;top:50%;left:50%;width:100%;height:100%;min-width:100%;min-height:100%;transform:translate(-50%,-50%);object-fit:cover;object-position:50% 50%;z-index:0;background:var(--dkgreen)}
-.login-bg-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,10,6,.55) 0%,rgba(0,10,6,.72) 100%);z-index:1;pointer-events:none}
-.login-box{background:rgba(8,8,8,.86);padding:4rem 2.8rem;width:90%;max-width:420px;text-align:center;border:1px solid rgba(196,164,74,.35);position:relative;z-index:2;backdrop-filter:blur(2px)}
-.login-box::before,.login-box::after{content:'';position:absolute;width:38px;height:38px;border-color:var(--gold);border-style:solid}
-.login-box::before{top:12px;left:12px;border-width:1px 0 0 1px}
-.login-box::after{bottom:12px;right:12px;border-width:0 1px 1px 0}
-.login-mono{font-family:var(--ff-ser);font-style:italic;font-weight:300;font-size:1.8rem;color:var(--gold);letter-spacing:.04em;line-height:1.1;margin-bottom:.4rem}
-.login-sub{font-family:var(--ff-ui);font-size:.6rem;letter-spacing:.4em;text-transform:uppercase;color:rgba(247,242,232,.3);margin-bottom:2.5rem;display:block}
-.login-box input{width:100%;padding:.9rem 1rem;margin-bottom:.8rem;background:rgba(255,255,255,.08);border:1px solid rgba(196,165,90,.55);color:var(--cream);font-family:var(--ff-ui);font-size:.95rem;letter-spacing:.18em;outline:none;transition:border-color .3s,background .3s;text-align:center}
-.login-box input::placeholder{color:rgba(255,255,255,.4);letter-spacing:.1em}
-.login-box input:focus{border-color:var(--gold);background:rgba(255,255,255,.12)}
-.login-err{color:#c0392b;font-family:var(--ff-ui);font-size:.7rem;margin-top:.6rem;display:none;letter-spacing:.05em}
+/* ── LOGIN · INVITACIÓN ── */
+#login{
+  position:fixed;inset:0;z-index:9999;background:var(--dkgreen);
+  display:flex;align-items:center;justify-content:center;
+  overflow-y:auto;padding:2rem 1.2rem;
+}
+/* El cursor personalizado no arranca hasta después del login: aquí usamos el del sistema */
+#login,#login *{cursor:auto}
+#login button{cursor:pointer}
+#login input{cursor:text}
+
+#login-bg{position:fixed;top:50%;left:50%;width:100%;height:100%;transform:translate(-50%,-50%);object-fit:cover;object-position:50% 50%;z-index:0;background:var(--dkgreen)}
+.login-bg-overlay{
+  position:fixed;inset:0;z-index:1;pointer-events:none;
+  background:radial-gradient(ellipse at 50% 45%,rgba(3,12,8,.26) 0%,rgba(3,12,8,.68) 68%,rgba(3,12,8,.90) 100%);
+}
+
+/* La tarjeta: papel color hueso sobre la ilustración */
+.login-box{
+  position:relative;z-index:2;
+  width:100%;max-width:400px;margin:auto;
+  background:linear-gradient(170deg,#FEFCF7 0%,#F5F0E2 100%);
+  padding:2.6rem 2.4rem 2.2rem;
+  text-align:center;
+  border:1px solid rgba(196,164,74,.5);
+  box-shadow:0 30px 80px rgba(0,0,0,.62);
+}
+/* filete interior */
+.login-box::before{content:'';position:absolute;inset:8px;border:1px solid rgba(196,164,74,.4);pointer-events:none}
+
+.inv-seal{
+  width:44px;height:44px;border-radius:50%;
+  border:1px solid rgba(196,164,74,.7);background:rgba(196,164,74,.08);
+  display:flex;align-items:center;justify-content:center;margin:0 auto 1.1rem;
+  font-family:var(--ff-ser);font-style:italic;font-size:.88rem;color:#9c7f2e;letter-spacing:.02em;
+}
+.inv-names{
+  font-family:var(--ff-ser);font-style:italic;font-weight:300;
+  font-size:clamp(1.9rem,6vw,2.5rem);line-height:1.02;color:var(--dkgreen);
+  margin-bottom:.7rem;
+}
+.inv-names .amp{color:var(--gold)}
+.inv-lede strong{font-weight:500;color:var(--dkgreen);letter-spacing:.01em}
+.inv-lede{
+  font-family:var(--ff-eb);font-size:.98rem;line-height:1.65;color:var(--tm);
+  max-width:270px;margin:0 auto;
+}
+.inv-gate{margin-top:1.6rem;padding-top:1.5rem;border-top:1px solid rgba(0,51,32,.14)}
+.inv-gate-help{
+  font-family:var(--ff-eb);font-style:italic;font-size:.86rem;color:var(--tm);
+  line-height:1.5;margin-bottom:.9rem;
+}
+.login-box input{
+  width:100%;padding:.8rem 1rem;margin-bottom:.6rem;
+  background:rgba(255,255,255,.72);border:1px solid rgba(0,51,32,.22);
+  color:var(--dkgreen);font-family:var(--ff-ui);font-size:.85rem;letter-spacing:.2em;
+  outline:none;text-align:center;transition:border-color .3s,background .3s;
+}
+.login-box input::placeholder{color:rgba(30,46,30,.38);letter-spacing:.14em}
+.login-box input:focus{border-color:var(--gold);background:#fff}
+.btn-invite{
+  width:100%;padding:.85rem 1.5rem;
+  background:var(--dkgreen);border:1px solid var(--dkgreen);color:var(--cream);
+  font-family:var(--ff-ui);font-size:.6rem;font-weight:400;
+  letter-spacing:.28em;text-transform:uppercase;transition:all .3s;
+}
+.btn-invite:hover{background:var(--gold);border-color:var(--gold);color:var(--dkgreen)}
+.login-err{color:#9e2f28;font-family:var(--ff-ui);font-size:.66rem;margin-top:.7rem;display:none;letter-spacing:.06em}
+
+@media(max-width:640px){
+  #login{padding:1.5rem 1rem}
+  .login-box{padding:2.1rem 1.5rem 1.9rem;max-width:360px}
+  .login-box::before{inset:6px}
+  .inv-seal{width:40px;height:40px;font-size:.82rem;margin-bottom:.9rem}
+}
+
+/* ── SAVE THE DATE (barra fija superior) ── */
+:root{--std-h:34px}
+#std-bar{
+  position:fixed;top:0;left:0;width:100%;height:var(--std-h);z-index:300;
+  display:flex;align-items:center;justify-content:center;
+  background:var(--dkgreen);border-bottom:1px solid rgba(196,164,74,.32);
+}
+#std-bar span{
+  font-family:var(--ff-ui);font-size:.55rem;font-weight:400;
+  letter-spacing:.32em;text-transform:uppercase;color:var(--gold);
+  text-align:center;padding:0 1rem;white-space:nowrap;
+  overflow:hidden;text-overflow:ellipsis;
+}
+@media(max-width:640px){
+  :root{--std-h:30px}
+  #std-bar span{font-size:.46rem;letter-spacing:.2em}
+}
 
 /* ── NAV ── */
 #nav{
-  position:fixed;top:0;width:100%;z-index:200;
+  position:fixed;top:var(--std-h);width:100%;z-index:200;
   padding:1.1rem 2.8rem;
   display:flex;align-items:center;justify-content:flex-end;
   gap:2.5rem;
@@ -70,8 +149,15 @@ button{font-family:var(--ff-ui);cursor:none}
 .nav-ul li.active::after{opacity:1}
 .nav-ul li.active a{color:var(--gold)}
 
-.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px}
-.hamburger span{width:22px;height:1px;background:var(--gold);display:block}
+.hamburger{
+  display:none;flex-direction:column;gap:4px;cursor:pointer;
+  background:rgba(8,8,8,.78);border:1px solid var(--gold);
+  padding:.5rem .55rem;backdrop-filter:blur(6px);
+  transition:background .3s,border-color .3s;
+}
+.hamburger span{width:20px;height:2px;background:var(--gold);display:block;transition:background .3s}
+.hamburger:hover,.hamburger:focus-visible{background:var(--gold)}
+.hamburger:hover span,.hamburger:focus-visible span{background:var(--dkgreen)}
 
 /* ── HERO ── */
 #hero{
@@ -99,7 +185,7 @@ button{font-family:var(--ff-ui);cursor:none}
 }
 .hero-h1 .ln{display:block}
 .hero-h1 .amp{font-style:italic;color:var(--gold)}
-.hero-meta{display:flex;flex-direction:column;gap:1rem;margin-bottom:2.5rem}
+.hero-meta{display:flex;flex-direction:column;gap:.35rem;margin-bottom:2.5rem}
 .hero-ceremony{
   font-family:var(--ff-ui);font-size:.65rem;letter-spacing:.35em;
   text-transform:uppercase;color:rgba(255,255,255,.38);
@@ -108,13 +194,17 @@ button{font-family:var(--ff-ui);cursor:none}
   font-family:var(--ff-ser);font-size:clamp(1rem,2.2vw,1.4rem);
   font-weight:300;color:var(--cream);letter-spacing:.12em;
 }
+.hero-place{
+  font-family:var(--ff-ser);font-style:italic;font-weight:300;
+  font-size:clamp(1.05rem,2.4vw,1.5rem);color:var(--gold);letter-spacing:.06em;
+}
 /* countdown left-aligned */
 .countdown{display:flex;gap:0;align-items:flex-start}
 .cd-item{text-align:center;padding:0 1.8rem 0 0;position:relative}
 .cd-item:not(:last-child){padding-right:1.8rem;margin-right:0}
 .cd-item:not(:last-child)::after{content:'';}
 .cd-num{font-family:var(--ff-ser);font-size:clamp(2rem,4.5vw,3.5rem);font-weight:300;color:var(--white);display:block;line-height:1}
-.cd-lbl{font-family:var(--ff-ui);font-size:.5rem;letter-spacing:.22em;text-transform:uppercase;color:var(--sage);margin-top:.4rem;display:block}
+.cd-lbl{font-family:var(--ff-ui);font-size:.5rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-top:.4rem;display:block}
 
 /* ── HERO VIDEO ── */
 #hero-video{
@@ -325,16 +415,25 @@ footer p{font-family:var(--ff-ui);font-size:.68rem;color:var(--sage);letter-spac
 
 
 
-/* sticky 4-photo quad grid */
-.sticky-quad-grid{
-  display:grid;grid-template-columns:1fr 1fr;gap:.4rem;
-  width:100%;max-width:400px;
+/* ── CARRUSEL de fotos ── */
+.carousel{width:100%;max-width:400px}
+.car-stage{position:relative;width:100%;aspect-ratio:3/4;overflow:hidden;background:var(--warm)}
+.car-slide{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  opacity:0;transition:opacity 1.1s ease;cursor:zoom-in;
 }
-.sticky-quad-grid img{
-  width:100%;aspect-ratio:1/1;object-fit:cover;
-  cursor:zoom-in;transition:transform .4s cubic-bezier(.16,1,.3,1);
+.car-slide.on{opacity:1}
+.car-dots{display:flex;gap:.55rem;justify-content:center;margin-top:.9rem}
+.car-dot{
+  width:7px;height:7px;padding:0;transform:rotate(45deg);
+  background:transparent;border:1px solid rgba(196,164,74,.6);
+  transition:background .3s,border-color .3s;
 }
-.sticky-quad-grid img:hover{transform:scale(1.04)}
+.car-dot.on{background:var(--gold);border-color:var(--gold)}
+
+/* ── INTRO centrada de sección narrativa ── */
+.story-intro{max-width:640px;margin:0 auto;padding:9vh 2rem 4vh;text-align:center}
+.story-intro .s-body{max-width:100%;margin:0 auto}
 
 /* dc mixed photo grid */
 .dc-mixed-grid{
@@ -351,7 +450,8 @@ footer p{font-family:var(--ff-ui);font-size:.68rem;color:var(--sage);letter-spac
 .dc-mixed-grid img:hover{transform:scale(1.04)}
 @media(max-width:860px){
   .dc-mixed-grid{grid-template-columns:repeat(3,1fr)}
-  .sticky-quad-grid{max-width:100%}
+  .carousel{max-width:100%}
+  .story-intro{padding:6vh 1.5rem 1vh}
 }
 @media(max-width:480px){
   .dc-mixed-grid{grid-template-columns:repeat(2,1fr)}
@@ -362,21 +462,30 @@ footer p{font-family:var(--ff-ui);font-size:.68rem;color:var(--sage);letter-spac
 
 <div id="cur"></div>
 
-<!-- ── LOGIN ── -->
+<!-- ── LOGIN · INVITACIÓN ── -->
 <div id="login">
   <!-- Imagen de fondo servida directamente desde el repositorio de GitHub (raw.githubusercontent.com) -->
   <img id="login-bg" src="https://raw.githubusercontent.com/gserranodaniel-ctrl/Boda-Fernando-y-Daniel/main/Foto-inicial.png" alt="">
   <div class="login-bg-overlay"></div>
+
   <div class="login-box">
-    <div class="login-mono">Fernando &amp; Daniel</div>
-    <span class="login-sub">Acceso privado</span>
-    <input type="password" id="lp" placeholder="Contraseña" autocomplete="off">
-    <button class="btn-primary" onclick="doLogin()" style="background:transparent;border:1px solid var(--gold);color:var(--gold);padding:.85rem 2rem;font-family:var(--ff-ui);font-size:.65rem;font-weight:400;letter-spacing:.32em;text-transform:uppercase;cursor:pointer;width:100%;margin-top:.2rem;transition:all .3s">Acceder</button>
-    <p class="login-err" id="lerr">Contraseña incorrecta</p>
+    <div class="inv-seal">F&amp;D</div>
+    <div class="inv-names">Fernando <span class="amp">&amp;</span> Daniel</div>
+    <p class="inv-lede">tenemos el placer de invitarles el<br><strong>28 de mayo de 2027</strong></p>
+
+    <div class="inv-gate">
+      <p class="inv-gate-help">Para más detalles, accede con la contraseña proporcionada.</p>
+      <input type="password" id="lp" placeholder="Contraseña" autocomplete="off">
+      <button class="btn-invite" onclick="doLogin()">Abrir la invitación</button>
+      <p class="login-err" id="lerr">La contraseña no es correcta</p>
+    </div>
   </div>
 </div>
 
 
+
+<!-- ── SAVE THE DATE (fija arriba) ── -->
+<div id="std-bar"><span>Save the Date — 28 de mayo de 2027</span></div>
 
 <!-- ── NAV (solo links, sin logo) ── -->
 <nav id="nav">
@@ -406,7 +515,8 @@ footer p{font-family:var(--ff-ui);font-size:.68rem;color:var(--sage);letter-spac
       <span class="ln" id="hL2">Fernando</span>
     </h1>
     <div class="hero-meta">
-      <span class="hero-dateline" id="hDate">Viernes 28 · Mayo · 2027 · Castillo de Batres</span>
+      <span class="hero-dateline" id="hDate">Viernes 28 de mayo de 2027</span>
+      <span class="hero-place"><em>Castillo de Batres</em></span>
     </div>
     <div class="countdown" id="hCD">
       <div class="cd-item"><span class="cd-num" id="cd-d">—</span><span class="cd-lbl">Días</span></div>
@@ -421,7 +531,7 @@ footer p{font-family:var(--ff-ui);font-size:.68rem;color:var(--sage);letter-spac
 <section id="narrative">
 <div class="narrative-inner">
 
-  <!-- Bloque 1: La historia -->
+  <!-- Bloque 1: Nuestra historia (unificado) -->
   <div class="story-block">
     <div class="story-sticky">
       <div class="img-box">
@@ -431,21 +541,14 @@ footer p{font-family:var(--ff-ui);font-size:.68rem;color:var(--sage);letter-spac
     <div class="story-scroll-col">
       <div class="stu" data-reveal>
         <span class="s-tag-gold">Nuestra historia</span>
-        <h2 class="s-headline s-headline--sm">Todo empezó<br>con una espera.</h2>
-        <p class="s-body">Fernando llegó tarde a la primera cita. Lo que podría haber sido el peor comienzo fue, en realidad, el principio de la mejor historia que podíamos imaginar. Esa espera, que se hizo eterna y no duró nada, fue el primer minuto de todo lo que vino después.</p>
-      </div>
-      <div class="stu" data-reveal>
-        <span class="s-tag-gold">Los años</span>
-        <h2 class="s-headline s-headline--sm">Y el tiempo<br>voló.</h2>
-        <p class="s-body">Un año y poco más tarde, el tiempo juntos se ha convertido en viajes, en risas a destiempo, en madrugadas largas, en proyectos compartidos y en la certeza silenciosa de que el otro siempre estará ahí. Por eso, en la última escapada a Barcelona sucedió la pedida, ¿para qué esperar más cuando los dos lo tenemos claro?</p>
+        <h2 class="s-headline s-headline--sm">Todo empez&oacute;<br>con una espera.</h2>
+        <p class="s-body">Fernando lleg&oacute; tarde a la primera cita. Lo que podr&iacute;a haber sido el peor comienzo fue, en realidad, el principio de la mejor historia que pod&iacute;amos imaginar. Esa espera, que se hizo eterna y no dur&oacute; nada, fue el primer minuto de todo lo que vino despu&eacute;s.</p>
+        <p class="s-body" style="margin-top:1.1rem">Un a&ntilde;o y poco m&aacute;s tarde, el tiempo juntos se ha convertido en viajes, en risas a destiempo, en madrugadas largas, en proyectos compartidos y en la certeza silenciosa de que el otro siempre estar&aacute; ah&iacute;. Por eso, en la &uacute;ltima escapada a Barcelona sucedi&oacute; la pedida, &iquest;para qu&eacute; esperar m&aacute;s cuando los dos lo tenemos claro?</p>
       </div>
     </div>
   </div>
 
-
-
-
-  <!-- Bloque 2: La celebración -->
+  <!-- Bloque 2: El lugar -->
   <div class="story-block flip">
     <div class="story-sticky">
       <div class="img-box">
@@ -454,25 +557,20 @@ footer p{font-family:var(--ff-ui);font-size:.68rem;color:var(--sage);letter-spac
     </div>
     <div class="story-scroll-col r">
       <div class="stu" data-reveal>
-        <span class="s-tag-gold">La celebración</span>
-        <h2 class="s-headline s-headline--sm">Una noche para<br>recordar.</h2>
-        <p class="s-body">Buscamos una celebración que trascienda lo convencional: una velada donde la música, el baile y la conversación se entrelacen con naturalidad, donde cada momento invite a quedarse un poco más. Una fiesta que, al terminar, permanezca en la memoria de todos con cariño.</p>
-      </div>
-      <div class="stu" data-reveal>
         <span class="s-tag-gold">El lugar</span>
         <h2 class="s-headline s-headline--sm">El Castillo<br>de Batres.</h2>
-        <p class="s-body">A cuarenta y cinco minutos de Madrid se encuentra este castillo del siglo XV, rodeado de jardines y muros de piedra que han sido testigos del paso del tiempo. Aquí vivió Garcilaso de la Vega, quien halló entre estos muros la inspiración para algunas de sus églogas más célebres. Sus versos nos recuerdan, aún hoy, la importancia de atender al presente: <em>«Coged de vuestra alegre primavera el dulce fruto»</em> (Soneto XXIII).</p>
-        <p class="s-body" style="margin-top:1rem">Este lugar tiene para nosotros un significado especial. En su juventud, Paquita, la abuela de Daniel, solía recorrer en bicicleta el camino desde Griñón hasta el castillo para pasar aquí los días de verano. Nos hace especial ilusión volver a este mismo lugar para comenzar nuestra propia historia, uniendo pasado y presente en un escenario que se abrirá ante nosotros como el lugar donde empezar a escribir nuestro futuro.</p>
+        <p class="s-body">A cuarenta y cinco minutos de Madrid se encuentra este castillo del siglo XV, rodeado de jardines y muros de piedra que han sido testigos del paso del tiempo. Aqu&iacute; vivi&oacute; Garcilaso de la Vega, quien hall&oacute; entre estos muros la inspiraci&oacute;n para algunas de sus &eacute;glogas m&aacute;s c&eacute;lebres. Sus versos nos recuerdan, a&uacute;n hoy, la importancia de atender al presente: <em>&laquo;Coged de vuestra alegre primavera el dulce fruto&raquo;</em> (Soneto XXIII).</p>
+        <p class="s-body" style="margin-top:1rem">Este lugar tiene para nosotros un significado especial. En su juventud, Paquita, la abuela de Daniel, sol&iacute;a recorrer en bicicleta el camino desde Gri&ntilde;&oacute;n hasta el castillo para pasar aqu&iacute; los d&iacute;as de verano. Nos hace especial ilusi&oacute;n volver a este mismo lugar para comenzar nuestra propia historia, uniendo pasado y presente en un escenario que se abrir&aacute; ante nosotros como el lugar donde empezar a escribir nuestro futuro.</p>
         <div class="info-inline">
           <div class="map-card">
             <div class="map-card-top">
-              <span class="map-card-label">📍 Castillo de Batres</span>
-              <span class="map-card-addr">Batres, 28909 Madrid · 45 min del centro</span>
+              <span class="map-card-label">&#128205; Castillo de Batres</span>
+              <span class="map-card-addr">Batres, 28909 Madrid &middot; 45 min del centro</span>
             </div>
-            <a class="map-card-btn" href="https://maps.google.com/?q=Castillo+de+Batres+Madrid" target="_blank">Abrir en Google Maps →</a>
+            <a class="map-card-btn" href="https://maps.google.com/?q=Castillo+de+Batres+Madrid" target="_blank">Abrir en Google Maps &rarr;</a>
           </div>
           <div class="ii-card">
-            <strong>🚌 Autobús desde Madrid</strong>
+            <strong>&#128652; Autob&uacute;s desde Madrid</strong>
             <p>Salida desde Madrid hacia el castillo (pendiente de confirmar lugar)</p>
           </div>
         </div>
@@ -483,44 +581,49 @@ footer p{font-family:var(--ff-ui);font-size:.68rem;color:var(--sage);letter-spac
   <!-- Marquee -->
   <div class="mq-wrap">
     <div class="mq-track" id="mq2">
-      <span class="mq-item">28 de mayo de 2027 &nbsp;·&nbsp; Castillo de Batres &nbsp;&nbsp;&nbsp;&nbsp;</span>
-      <span class="mq-item">28 de mayo de 2027 &nbsp;·&nbsp; Castillo de Batres &nbsp;&nbsp;&nbsp;&nbsp;</span>
-      <span class="mq-item">28 de mayo de 2027 &nbsp;·&nbsp; Castillo de Batres &nbsp;&nbsp;&nbsp;&nbsp;</span>
+      <span class="mq-item">28 de mayo de 2027 &nbsp;&middot;&nbsp; Castillo de Batres &nbsp;&nbsp;&nbsp;&nbsp;</span>
+      <span class="mq-item">28 de mayo de 2027 &nbsp;&middot;&nbsp; Castillo de Batres &nbsp;&nbsp;&nbsp;&nbsp;</span>
+      <span class="mq-item">28 de mayo de 2027 &nbsp;&middot;&nbsp; Castillo de Batres &nbsp;&nbsp;&nbsp;&nbsp;</span>
     </div>
   </div>
 
-  <!-- Bloque 3: Vosotros + info práctica embebida -->
+  <!-- Bloque 3a: intro (va ANTES de las fotos) -->
+  <div class="story-intro stu" data-reveal>
+    <span class="s-tag-gold">As&iacute; ser&aacute; la noche</span>
+    <h2 class="s-headline s-headline--sm">Una velada<br>para recordar.</h2>
+    <p class="s-body">Cena a la luz de las velas, jardines iluminados y m&uacute;sica que nos acompa&ntilde;ar&aacute; hasta bien entrada la noche. Queremos una celebraci&oacute;n elegante y viva, de esas que se alargan sin darse cuenta.</p>
+    <p class="s-body" style="margin-top:1rem">Solo hay una condici&oacute;n: venir con ganas de disfrutar.</p>
+  </div>
+
+  <!-- Bloque 3b: carrusel + informaci&oacute;n pr&aacute;ctica -->
   <div class="story-block">
     <div class="story-sticky">
-      <div class="sticky-quad-grid">
-          <img src="Fiesta0.jpeg" alt="" onclick="openLb(this.src)">
-          <img src="Fiesta3.jpeg" alt="" onclick="openLb(this.src)">
-          <img src="Fiesta2.jpeg" alt="" onclick="openLb(this.src)">
-          <img src="Fiesta1.jpeg" alt="" onclick="openLb(this.src)">
+      <div class="carousel" id="carousel">
+        <div class="car-stage">
+          <img class="car-slide on" src="Fiesta0.jpeg" alt="" onclick="openLb(this.src)">
+          <img class="car-slide" src="Fiesta3.jpeg" alt="" onclick="openLb(this.src)">
+          <img class="car-slide" src="Fiesta2.jpeg" alt="" onclick="openLb(this.src)">
+          <img class="car-slide" src="Fiesta1.jpeg" alt="" onclick="openLb(this.src)">
         </div>
+        <div class="car-dots"></div>
+      </div>
     </div>
     <div class="story-scroll-col">
       <div class="stu" data-reveal>
-        <span class="s-tag-gold">Así será la noche</span>
-        <h2 class="s-headline s-headline--sm">Una velada<br>para recordar.</h2>
-        <p class="s-body">Cena a la luz de las velas, jardines iluminados y música que nos acompañará hasta bien entrada la noche. Queremos una celebración elegante y viva, de esas que se alargan sin darse cuenta.</p>
-        <p class="s-body" style="margin-top:1rem">Solo hay una condición: venir con ganas de disfrutar.</p>
-      </div>
-      <div class="stu" data-reveal>
-        <span class="s-tag-gold">Información práctica</span>
+        <span class="s-tag-gold">Informaci&oacute;n pr&aacute;ctica</span>
         <h2 class="s-headline s-headline-sm">Todo lo que<br>necesitas saber.</h2>
         <div class="info-inline">
           <div class="ii-card">
-            <strong>🏨 Alojamiento</strong>
-            <p>Si venís de fuera, avisadnos antes de reservar e indicadlo al confirmar.</p>
+            <strong>&#127976; Alojamiento</strong>
+            <p>Si ven&iacute;s de fuera, avisadnos antes de reservar e indicadlo al confirmar.</p>
           </div>
           <div class="ii-card">
-            <strong>🎁 Lista de bodas</strong>
-            <p>Vuestra presencia es el mejor regalo y si además queréis echarnos un cable económico: <strong>ES82 0049 2674 5125 1441 6013</strong></p>
+            <strong>&#127873; Lista de bodas</strong>
+            <p>Vuestra presencia es el mejor regalo y si adem&aacute;s quer&eacute;is echarnos un cable econ&oacute;mico: <strong>ES82 0049 2674 5125 1441 6013</strong></p>
           </div>
           <div class="ii-card">
-            <strong>📞 Contacto</strong>
-            <p>Daniel: <a href="tel:+34645516876">645 516 876</a> · Fernando: <a href="tel:+34649485472">649 485 472</a></p>
+            <strong>&#128222; Contacto</strong>
+            <p>Daniel: <a href="tel:+34645516876">645 516 876</a> &middot; Fernando: <a href="tel:+34649485472">649 485 472</a></p>
           </div>
         </div>
       </div>
@@ -658,6 +761,7 @@ function doLogin(){
 
 function boot(){
   initHeroVideo();
+  initCarousel();
   initCursor();
   initNav();
   heroAnim();
@@ -678,6 +782,39 @@ function initHeroVideo(){
   // Safari/iOS suelen pausar el vídeo al cambiar de pestaña o volver de background
   document.addEventListener('visibilitychange',()=>{if(!document.hidden)play();});
   v.addEventListener('pause',()=>{if(!document.hidden)play();});
+}
+
+/* ── CARRUSEL ── */
+function initCarousel(){
+  const c=document.getElementById('carousel');
+  if(!c)return;
+  const slides=Array.prototype.slice.call(c.querySelectorAll('.car-slide'));
+  const wrap=c.querySelector('.car-dots');
+  if(slides.length<2)return;
+  let i=0,timer=null;
+
+  slides.forEach((s,n)=>{
+    const d=document.createElement('button');
+    d.className='car-dot'+(n===0?' on':'');
+    d.type='button';
+    d.setAttribute('aria-label','Foto '+(n+1));
+    d.addEventListener('click',()=>{go(n);restart();});
+    wrap.appendChild(d);
+  });
+  const dots=Array.prototype.slice.call(wrap.children);
+
+  function go(n){
+    slides[i].classList.remove('on');dots[i].classList.remove('on');
+    i=n;
+    slides[i].classList.add('on');dots[i].classList.add('on');
+  }
+  function next(){go((i+1)%slides.length);}
+  function restart(){clearInterval(timer);timer=setInterval(next,4500);}
+
+  restart();
+  c.addEventListener('mouseenter',()=>clearInterval(timer));
+  c.addEventListener('mouseleave',restart);
+  document.addEventListener('visibilitychange',()=>{document.hidden?clearInterval(timer):restart();});
 }
 
 /* ── CURSOR ── */
