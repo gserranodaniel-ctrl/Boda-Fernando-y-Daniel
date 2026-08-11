@@ -277,11 +277,6 @@ button{font-family:var(--ff-ui);cursor:none}
 .map-card-btn{display:inline-block;margin:.5rem 1rem .85rem;padding:.4rem .9rem;font-family:var(--ff-ui);font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:var(--midgreen);border:1px solid rgba(0,51,32,.28);background:transparent;transition:all .25s}
 .map-card-btn:hover{background:var(--midgreen);color:var(--white)}
 
-/* ── MARQUEE ── */
-.mq-wrap{background:var(--dkgreen);padding:1.2rem 0;overflow:hidden;border-top:1px solid rgba(196,164,74,.15);border-bottom:1px solid rgba(196,164,74,.15);width:100vw;position:relative;left:50%;right:50%;margin-left:-50vw;margin-right:-50vw}
-.mq-track{display:inline-flex;white-space:nowrap;will-change:transform}
-.mq-item{font-family:var(--ff-ser);font-style:italic;font-size:clamp(.9rem,1.8vw,1.3rem);color:var(--gold);padding-right:3rem;letter-spacing:.05em}
-
 /* ── PROGRAMA ── */
 #programa{background:var(--dkgreen);padding:5rem 2rem}
 .prog-card{max-width:520px;margin:2.5rem auto 0;border:1px solid rgba(196,164,74,.22);background:rgba(0,0,0,.28)}
@@ -446,7 +441,7 @@ footer p{font-family:var(--ff-ui);font-size:.68rem;color:var(--sage);letter-spac
   border-bottom:1px solid rgba(196,164,74,.22);
   /* OJO: nunca usar el atajo 'margin' aqui, anularia el margin-left:-50vw */
   margin-top:4vh;margin-bottom:4vh;margin-right:0;
-  height:clamp(115px,13vw,175px);  /* franja sutil */
+  height:clamp(215px,26vw,340px);  /* franja alta */
   /* line-height/font-size a 0: elimina el hueco de baseline bajo las fotos */
   line-height:0;font-size:0;
 }
@@ -463,6 +458,17 @@ footer p{font-family:var(--ff-ui);font-size:.68rem;color:var(--sage);letter-spac
   filter:grayscale(6%) contrast(1.03);
 }
 
+/* ── Cuadricula estatica de 4 fotos ── */
+.quad-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:.5rem;
+  width:100%;max-width:520px;margin:2.6rem auto 0;
+}
+.quad-grid img{
+  width:100%;aspect-ratio:1/1;object-fit:cover;
+  cursor:zoom-in;transition:transform .45s cubic-bezier(.16,1,.3,1);
+}
+.quad-grid img:hover{transform:scale(1.03)}
+
 /* ── Bloque de informaci&oacute;n bajo el banner ── */
 .info-below{max-width:920px;margin:0 auto;padding:4vh 2rem 8vh;text-align:center}
 .info-grid{
@@ -477,6 +483,7 @@ footer p{font-family:var(--ff-ui);font-size:.68rem;color:var(--sage);letter-spac
 
 @media(max-width:860px){
   .story-intro{padding:6vh 1.5rem 1vh}
+  .quad-grid{gap:.35rem;max-width:100%;margin-top:2rem}
   .info-below{padding:3vh 1.4rem 6vh}
   .info-grid{grid-template-columns:1fr}
 }
@@ -602,25 +609,12 @@ footer p{font-family:var(--ff-ui);font-size:.68rem;color:var(--sage);letter-spac
     </div>
   </div>
 
-  <!-- Marquee -->
-  <div class="mq-wrap">
-    <div class="mq-track" id="mq2">
-      <span class="mq-item">28 de mayo de 2027 &nbsp;&middot;&nbsp; Castillo de Batres &nbsp;&nbsp;&nbsp;&nbsp;</span>
-      <span class="mq-item">28 de mayo de 2027 &nbsp;&middot;&nbsp; Castillo de Batres &nbsp;&nbsp;&nbsp;&nbsp;</span>
-      <span class="mq-item">28 de mayo de 2027 &nbsp;&middot;&nbsp; Castillo de Batres &nbsp;&nbsp;&nbsp;&nbsp;</span>
-    </div>
-  </div>
-
   <!-- Bloque 3a: intro (va ANTES de las fotos) -->
   <div class="story-intro stu" data-reveal>
     <span class="s-tag-gold">As&iacute; ser&aacute; la noche</span>
     <h2 class="s-headline s-headline--sm">Una velada<br>para recordar.</h2>
     <p class="s-body">Cena a la luz de las velas, jardines iluminados y m&uacute;sica que nos acompa&ntilde;ar&aacute; hasta bien entrada la noche. Queremos una celebraci&oacute;n elegante y viva, de esas que se alargan sin darse cuenta.</p>
-  </div>
-
-  <!-- Bloque 3b: banner de fotos a todo el ancho -->
-  <div class="photo-banner">
-    <div class="pb-track" id="pb-track">
+    <div class="quad-grid">
       <img src="Fiesta0.jpeg" alt="" onclick="openLb(this.src)">
       <img src="Fiesta3.jpeg" alt="" onclick="openLb(this.src)">
       <img src="Fiesta2.jpeg" alt="" onclick="openLb(this.src)">
@@ -762,13 +756,11 @@ function doLogin(){
 
 function boot(){
   initHeroVideo();
-  initPhotoBanner('pb-track',42);
   initPhotoBanner('dc-track',70);
   initCursor();
   initNav();
   heroAnim();
   countdown();
-  initMarquees();
   initStory();
   initFadeIn();
   initActiveSections();
@@ -790,7 +782,8 @@ function initHeroVideo(){
 /* El bucle desplaza la tira como maximo el ancho de UNA secuencia. Para que no
    quede hueco a la derecha hacen falta copias suficientes para cubrir la
    pantalla mas ese desplazamiento: (copias-1) * secuencia >= ancho ventana.
-   Por eso las copias se calculan en ejecucion y no van fijas en el HTML. */
+   Se anade una copia extra de margen. Las copias se calculan en ejecucion,
+   nunca fijas en el HTML: dependen del ancho de pantalla y del alto de la tira. */
 function initPhotoBanner(id,duration){
   const el=document.getElementById(id);
   if(!el||typeof gsap==='undefined')return;
@@ -801,7 +794,7 @@ function initPhotoBanner(id,duration){
 
   function ensureCopies(){
     if(!seq)return;
-    const need=Math.max(2,Math.ceil(window.innerWidth/seq)+1);
+    const need=Math.max(3,Math.ceil(window.innerWidth/seq)+2);
     while(copies<need){
       base.forEach(n=>el.appendChild(n.cloneNode(true)));
       copies++;
@@ -904,14 +897,6 @@ function countdown(){
     document.getElementById('cd-s').textContent=pad(diff%60000/1000);
   }
   tick();setInterval(tick,1000);
-}
-
-/* ── MARQUEES ── */
-function initMarquees(){
-  const el=document.getElementById('mq2');if(!el)return;
-  const w=el.scrollWidth/3;
-  gsap.to(el,{x:-w,duration:30,ease:'none',repeat:-1,
-    modifiers:{x:gsap.utils.unitize(x=>parseFloat(x)%w)}});
 }
 
 /* ── STORY REVEAL ── */
