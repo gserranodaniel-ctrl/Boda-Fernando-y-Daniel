@@ -425,21 +425,28 @@ footer p{font-family:var(--ff-ui);font-size:.68rem;color:var(--sage);letter-spac
 
 
 
-/* ── CARRUSEL de fotos ── */
-.carousel{width:100%;max-width:400px}
-.car-stage{position:relative;width:100%;aspect-ratio:3/4;overflow:hidden;background:var(--warm)}
-.car-slide{
-  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
-  opacity:0;transition:opacity 1.1s ease;cursor:zoom-in;
+/* ── BANNER de fotos a todo el ancho (tipo marquesina) ── */
+.photo-banner{
+  width:100vw;position:relative;left:50%;margin-left:-50vw;
+  overflow:hidden;background:var(--dkgreen);
+  border-top:1px solid rgba(196,164,74,.15);
+  border-bottom:1px solid rgba(196,164,74,.15);
+  margin-top:2vh;
 }
-.car-slide.on{opacity:1}
-.car-dots{display:flex;gap:.55rem;justify-content:center;margin-top:.9rem}
-.car-dot{
-  width:7px;height:7px;padding:0;transform:rotate(45deg);
-  background:transparent;border:1px solid rgba(196,164,74,.6);
-  transition:background .3s,border-color .3s;
+.pb-track{display:inline-flex;white-space:nowrap;will-change:transform}
+.pb-track img{
+  height:clamp(180px,24vw,320px);width:auto;
+  object-fit:cover;flex-shrink:0;cursor:zoom-in;
+  margin-right:.4rem;
+  filter:grayscale(6%) contrast(1.03);
 }
-.car-dot.on{background:var(--gold);border-color:var(--gold)}
+
+/* ── Bloque de informaci&oacute;n bajo el banner ── */
+.info-below{max-width:920px;margin:0 auto;padding:7vh 2rem 8vh;text-align:center}
+.info-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:.8rem;
+  margin-top:2.2rem;text-align:left;
+}
 
 /* ── INTRO centrada de sección narrativa ── */
 .story-intro{max-width:640px;margin:0 auto;padding:9vh 2rem 4vh;text-align:center}
@@ -460,8 +467,9 @@ footer p{font-family:var(--ff-ui);font-size:.68rem;color:var(--sage);letter-spac
 .dc-mixed-grid img:hover{transform:scale(1.04)}
 @media(max-width:860px){
   .dc-mixed-grid{grid-template-columns:repeat(3,1fr)}
-  .carousel{max-width:100%}
   .story-intro{padding:6vh 1.5rem 1vh}
+  .info-below{padding:5vh 1.4rem 6vh}
+  .info-grid{grid-template-columns:1fr}
 }
 @media(max-width:480px){
   .dc-mixed-grid{grid-template-columns:repeat(2,1fr)}
@@ -502,7 +510,6 @@ footer p{font-family:var(--ff-ui);font-size:.68rem;color:var(--sage);letter-spac
   <button class="hamburger" onclick="toggleNav()"><span></span><span></span><span></span></button>
   <ul class="nav-ul" id="nav-ul">
     <li data-section="narrative"><a href="#narrative" onclick="closeNav()">Historia</a></li>
-    <li data-section="programa"><a href="#programa" onclick="closeNav()">Programa</a></li>
     <li data-section="dresscode"><a href="#dresscode" onclick="closeNav()">Dress code</a></li>
     <li data-section="rsvp"><a href="#rsvp" onclick="closeNav()">Confirmar</a></li>
   </ul>
@@ -602,71 +609,47 @@ footer p{font-family:var(--ff-ui);font-size:.68rem;color:var(--sage);letter-spac
     <span class="s-tag-gold">As&iacute; ser&aacute; la noche</span>
     <h2 class="s-headline s-headline--sm">Una velada<br>para recordar.</h2>
     <p class="s-body">Cena a la luz de las velas, jardines iluminados y m&uacute;sica que nos acompa&ntilde;ar&aacute; hasta bien entrada la noche. Queremos una celebraci&oacute;n elegante y viva, de esas que se alargan sin darse cuenta.</p>
-    <p class="s-body" style="margin-top:1rem">Solo hay una condici&oacute;n: venir con ganas de disfrutar.</p>
   </div>
 
-  <!-- Bloque 3b: carrusel + informaci&oacute;n pr&aacute;ctica -->
-  <div class="story-block">
-    <div class="story-sticky">
-      <div class="carousel" id="carousel">
-        <div class="car-stage">
-          <img class="car-slide on" src="Fiesta0.jpeg" alt="" onclick="openLb(this.src)">
-          <img class="car-slide" src="Fiesta3.jpeg" alt="" onclick="openLb(this.src)">
-          <img class="car-slide" src="Fiesta2.jpeg" alt="" onclick="openLb(this.src)">
-          <img class="car-slide" src="Fiesta1.jpeg" alt="" onclick="openLb(this.src)">
-        </div>
-        <div class="car-dots"></div>
-      </div>
+  <!-- Bloque 3b: banner de fotos a todo el ancho -->
+  <div class="photo-banner">
+    <div class="pb-track" id="pb-track">
+      <img src="Fiesta0.jpeg" alt="" onclick="openLb(this.src)">
+      <img src="Fiesta3.jpeg" alt="" onclick="openLb(this.src)">
+      <img src="Fiesta2.jpeg" alt="" onclick="openLb(this.src)">
+      <img src="Fiesta1.jpeg" alt="" onclick="openLb(this.src)">
+      <img src="Fiesta0.jpeg" alt="" onclick="openLb(this.src)">
+      <img src="Fiesta3.jpeg" alt="" onclick="openLb(this.src)">
+      <img src="Fiesta2.jpeg" alt="" onclick="openLb(this.src)">
+      <img src="Fiesta1.jpeg" alt="" onclick="openLb(this.src)">
+      <img src="Fiesta0.jpeg" alt="" onclick="openLb(this.src)">
+      <img src="Fiesta3.jpeg" alt="" onclick="openLb(this.src)">
+      <img src="Fiesta2.jpeg" alt="" onclick="openLb(this.src)">
+      <img src="Fiesta1.jpeg" alt="" onclick="openLb(this.src)">
     </div>
-    <div class="story-scroll-col">
-      <div class="stu" data-reveal>
-        <span class="s-tag-gold">Informaci&oacute;n pr&aacute;ctica</span>
-        <h2 class="s-headline s-headline-sm">Todo lo que<br>necesitas saber.</h2>
-        <div class="info-inline">
-          <div class="ii-card">
-            <strong>&#127976; Alojamiento</strong>
-            <p>Si ven&iacute;s de fuera, avisadnos antes de reservar e indicadlo al confirmar.</p>
-          </div>
-          <div class="ii-card">
-            <strong>&#127873; Lista de bodas</strong>
-            <p>Vuestra presencia es el mejor regalo y si adem&aacute;s quer&eacute;is echarnos un cable econ&oacute;mico: <strong>ES82 0049 2674 5125 1441 6013</strong></p>
-          </div>
-          <div class="ii-card">
-            <strong>&#128222; Contacto</strong>
-            <p>Daniel: <a href="tel:+34645516876">645 516 876</a> &middot; Fernando: <a href="tel:+34649485472">649 485 472</a></p>
-          </div>
-        </div>
+  </div>
+
+  <!-- Bloque 3c: informaci&oacute;n pr&aacute;ctica, debajo del banner -->
+  <div class="info-below stu" data-reveal>
+    <span class="s-tag-gold">Informaci&oacute;n pr&aacute;ctica</span>
+    <h2 class="s-headline s-headline--sm">Todo lo que<br>necesitas saber.</h2>
+    <div class="info-grid">
+      <div class="ii-card">
+        <strong>&#127976; Alojamiento</strong>
+        <p>Si ven&iacute;s de fuera, avisadnos antes de reservar e indicadlo al confirmar.</p>
+      </div>
+      <div class="ii-card">
+        <strong>&#127873; Lista de bodas</strong>
+        <p>Vuestra presencia es el mejor regalo y si adem&aacute;s quer&eacute;is echarnos un cable econ&oacute;mico: <strong>ES82 0049 2674 5125 1441 6013</strong></p>
+      </div>
+      <div class="ii-card">
+        <strong>&#128222; Contacto</strong>
+        <p>Daniel: <a href="tel:+34645516876">645 516 876</a> &middot; Fernando: <a href="tel:+34649485472">649 485 472</a></p>
       </div>
     </div>
   </div>
 
 </div>
-</section>
-
-<!-- ── PROGRAMA ── -->
-<section id="programa">
-  <div class="container">
-    <span class="s-label fi">28 Mayo · 2027</span>
-    <h2 class="s-title light fi">El Gran <em>Día</em></h2>
-    <div class="rule-c fi"><div class="rl"></div><div class="dia"></div><div class="rl"></div></div>
-    <div class="prog-card fi">
-      <div class="prog-head">
-        <span class="prog-num">28</span>
-        <div class="prog-name">Viernes · Mayo · 2027</div>
-        <div class="prog-place">Castillo de Batres · Batres, Madrid</div>
-      </div>
-      <div class="tl">
-        <div class="tl-row"><span class="tl-time">18:00</span><div class="tl-track"><div class="tl-dot tl-dot-bus"></div></div><div><div class="tl-h tl-bus">🚌 Recogida autobús</div><p class="tl-p">Salida desde Madrid hacia el castillo</p></div></div>
-        <div class="tl-row"><span class="tl-time">19:00</span><div class="tl-track"><div class="tl-dot"></div></div><div><div class="tl-h">Llegada</div><p class="tl-p">Bienvenida y recepción en los jardines</p></div></div>
-        <div class="tl-row"><span class="tl-time">19:15</span><div class="tl-track"><div class="tl-dot"></div></div><div><div class="tl-h">Ceremonia civil</div><p class="tl-p">En el jardín principal del castillo</p></div></div>
-        <div class="tl-row"><span class="tl-time">20:00</span><div class="tl-track"><div class="tl-dot"></div></div><div><div class="tl-h">Cóctel</div><p class="tl-p">Jardines históricos del castillo</p></div></div>
-        <div class="tl-row"><span class="tl-time">22:00</span><div class="tl-track"><div class="tl-dot"></div></div><div><div class="tl-h">Cena</div><p class="tl-p">Menú degustación en el gran salón</p></div></div>
-        <div class="tl-row"><span class="tl-time">00:00</span><div class="tl-track"><div class="tl-dot"></div></div><div><div class="tl-h">Fiesta</div><p class="tl-p">Música, baile y alguna que otra sorpresa</p></div></div>
-        <div class="tl-row"><span class="tl-time">04:10</span><div class="tl-track"><div class="tl-dot tl-dot-bus"></div></div><div><div class="tl-h tl-bus">🚌 Regreso autobús</div><p class="tl-p">Vuelta a Madrid desde el castillo</p></div></div>
-        <p class="tl-note">Los horarios son orientativos y se irán confirmando a medida que se acerque la fecha. Los puntos de recogida y regreso del autobús están también pendientes de confirmar.</p>
-      </div>
-    </div>
-  </div>
 </section>
 
 <!-- ── DRESSCODE ── -->
@@ -744,13 +727,6 @@ footer p{font-family:var(--ff-ui);font-size:.68rem;color:var(--sage);letter-spac
   </div>
 </section>
 
-<!-- ── FOOTER ── -->
-<footer>
-  <h2 class="foot-names">Daniel<br><em>&</em><br>Fernando</h2>
-  <p>28 de Mayo · 2027 · Castillo de Batres</p>
-
-</footer>
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script>
@@ -787,7 +763,7 @@ function doLogin(){
 
 function boot(){
   initHeroVideo();
-  initCarousel();
+  initPhotoBanner();
   initCursor();
   initNav();
   heroAnim();
@@ -810,37 +786,28 @@ function initHeroVideo(){
   v.addEventListener('pause',()=>{if(!document.hidden)play();});
 }
 
-/* ── CARRUSEL ── */
-function initCarousel(){
-  const c=document.getElementById('carousel');
-  if(!c)return;
-  const slides=Array.prototype.slice.call(c.querySelectorAll('.car-slide'));
-  const wrap=c.querySelector('.car-dots');
-  if(slides.length<2)return;
-  let i=0,timer=null;
+/* ── BANNER DE FOTOS ── */
+function initPhotoBanner(){
+  const el=document.getElementById('pb-track');
+  if(!el||typeof gsap==='undefined')return;
 
-  slides.forEach((s,n)=>{
-    const d=document.createElement('button');
-    d.className='car-dot'+(n===0?' on':'');
-    d.type='button';
-    d.setAttribute('aria-label','Foto '+(n+1));
-    d.addEventListener('click',()=>{go(n);restart();});
-    wrap.appendChild(d);
-  });
-  const dots=Array.prototype.slice.call(wrap.children);
-
-  function go(n){
-    slides[i].classList.remove('on');dots[i].classList.remove('on');
-    i=n;
-    slides[i].classList.add('on');dots[i].classList.add('on');
+  function run(){
+    const w=el.scrollWidth/3;          // 3 copias de la secuencia
+    if(!w)return;
+    gsap.to(el,{x:-w,duration:40,ease:'none',repeat:-1,
+      modifiers:{x:gsap.utils.unitize(x=>parseFloat(x)%w)}});
   }
-  function next(){go((i+1)%slides.length);}
-  function restart(){clearInterval(timer);timer=setInterval(next,4500);}
 
-  restart();
-  c.addEventListener('mouseenter',()=>clearInterval(timer));
-  c.addEventListener('mouseleave',restart);
-  document.addEventListener('visibilitychange',()=>{document.hidden?clearInterval(timer):restart();});
+  // Arrancar solo cuando las im&aacute;genes tengan dimensiones reales
+  const imgs=Array.prototype.slice.call(el.querySelectorAll('img'));
+  let pending=imgs.filter(im=>!im.complete).length;
+  if(pending===0){run();return;}
+  imgs.forEach(im=>{
+    if(im.complete)return;
+    const done=()=>{if(--pending===0)run();};
+    im.addEventListener('load',done,{once:true});
+    im.addEventListener('error',done,{once:true});
+  });
 }
 
 /* ── CURSOR ── */
@@ -864,7 +831,7 @@ function closeNav(){document.getElementById('nav-ul').classList.remove('open');}
 
 /* ── ACTIVE SECTION INDICATOR ── */
 function initActiveSections(){
-  const sections=['hero','narrative','programa','dresscode','rsvp'];
+  const sections=['hero','narrative','dresscode','rsvp'];
   const navItems=document.querySelectorAll('.nav-ul li[data-section]');
 
   const obs=new IntersectionObserver(entries=>{
