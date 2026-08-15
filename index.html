@@ -106,44 +106,34 @@ button{font-family:var(--ff-ui);cursor:none}
   .inv-seal{width:40px;height:40px;font-size:.82rem;margin-bottom:.9rem}
 }
 
-/* ── SAVE THE DATE (barra fija superior) ── */
-:root{--std-h:34px}
+/* ── SAVE THE DATE + NAV (barra fija superior unificada) ── */
+:root{--std-h:56px}
 #std-bar{
-  position:fixed;top:0;left:0;width:100%;height:var(--std-h);z-index:300;
-  display:flex;align-items:center;justify-content:center;
+  position:fixed;top:0;left:0;width:100%;min-height:var(--std-h);z-index:300;
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;
+  gap:.6rem 1.6rem;
+  padding:.7rem 1.6rem;
   background:var(--dkgreen);border-bottom:1px solid rgba(196,164,74,.32);
 }
-#std-bar span{
+.std-text{
   font-family:var(--ff-ui);font-size:.55rem;font-weight:400;
-  letter-spacing:.3em;text-transform:uppercase;color:var(--gold);
-  text-align:center;width:100%;padding:0 .8rem;
+  letter-spacing:.22em;text-transform:uppercase;color:var(--gold);
   white-space:nowrap;line-height:1;
 }
 @media(max-width:640px){
-  :root{--std-h:36px}
-  /* el letter-spacing deja un hueco tras el ultimo caracter: se compensa
-     con algo mas de padding a la izquierda para centrar de verdad */
-  #std-bar span{font-size:.58rem;letter-spacing:.12em;padding:0 .5rem 0 .62rem}
+  .std-text{font-size:.56rem;letter-spacing:.1em}
 }
 @media(max-width:360px){
-  #std-bar span{font-size:.52rem;letter-spacing:.07em}
+  .std-text{font-size:.5rem;letter-spacing:.05em}
 }
 
 /* ── NAV ── */
-#nav{
-  position:fixed;top:var(--std-h);width:100%;z-index:200;
-  padding:1.1rem 2.8rem;
-  display:flex;align-items:center;justify-content:flex-end;
-  gap:2.5rem;
-  transition:background .4s,border-color .4s;
-}
-#nav.solid{background:rgba(8,8,8,.97);backdrop-filter:blur(14px);border-bottom:1px solid rgba(196,164,74,.18)}
 .nav-ul{list-style:none;display:flex;gap:2.2rem;align-items:center}
 .nav-ul li{position:relative}
 .nav-ul a{
   font-family:var(--ff-ui);font-size:.58rem;font-weight:400;
   letter-spacing:.22em;text-transform:uppercase;
-  color:rgba(255,255,255,.38);transition:color .3s;
+  color:rgba(255,255,255,.7);transition:color .3s;
   padding-bottom:.3rem;
 }
 .nav-ul a:hover{color:var(--gold)}
@@ -158,8 +148,8 @@ button{font-family:var(--ff-ui);cursor:none}
 
 .hamburger{
   display:none;flex-direction:column;gap:4px;cursor:pointer;
-  background:rgba(8,8,8,.78);border:1px solid var(--gold);
-  padding:.5rem .55rem;backdrop-filter:blur(6px);
+  background:rgba(255,255,255,.06);border:1px solid var(--gold);
+  padding:.5rem .55rem;
   transition:background .3s,border-color .3s;
 }
 .hamburger span{width:20px;height:2px;background:var(--gold);display:block;transition:background .3s}
@@ -307,7 +297,7 @@ button{font-family:var(--ff-ui);cursor:none}
 /* inline info cards within narrative */
 .info-inline{margin-top:1.2rem;display:flex;flex-direction:column;gap:.6rem;max-width:320px}
 .ii-card{padding:.85rem 1rem;border-left:2px solid var(--gold);background:rgba(0,71,44,.06)}
-.ii-card strong{font-family:var(--ff-ser);font-size:.95rem;font-weight:400;color:var(--td);display:block;margin-bottom:.2rem}
+.ii-card strong{font-family:var(--ff-ui);font-size:.68rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--dkgreen);display:block;margin-bottom:.4rem}
 .ii-card p{font-family:var(--ff-eb);font-size:.85rem;color:var(--tm);line-height:1.65}
 .ii-card a{color:var(--midgreen)}
 /* map card — same style as ii-card, lighter button */
@@ -348,7 +338,7 @@ button{font-family:var(--ff-ui);cursor:none}
 .dc-col h3{font-family:var(--ff-ui);font-size:.6rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:1.3rem}
 .dc-col p{font-family:var(--ff-eb);font-size:1rem;line-height:1.95;color:var(--td)}
 .dc-note{font-family:var(--ff-eb);font-style:italic;font-size:.92rem;color:var(--tm);margin-top:1rem;padding:1rem;background:rgba(0,51,32,.06);border-left:2px solid var(--gold)}
-.dc-wilde{font-family:var(--ff-eb);font-style:italic;font-size:.95rem;color:var(--tm);text-align:center;margin:1.5rem auto 0;max-width:600px;line-height:1.8}
+.dc-wilde{font-family:var(--ff-eb);font-style:italic;font-size:1.15rem;color:var(--tm);text-align:center;margin:1.5rem auto 0;max-width:600px;line-height:1.8}
 .swatches{display:grid;grid-template-columns:repeat(6,1fr);gap:.6rem;max-width:760px;margin:0 auto}
 .sw{aspect-ratio:2/3;border-radius:1px;display:flex;align-items:flex-end;padding:.6rem;overflow:hidden;transition:transform .4s cubic-bezier(.16,1,.3,1)}
 .sw:hover{transform:scale(1.04)}
@@ -385,7 +375,7 @@ button{font-family:var(--ff-ui);cursor:none}
 #rsvp::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 100%,rgba(29,74,50,.38) 0%,transparent 60%);pointer-events:none}
 .rsvp-head{text-align:center;margin-bottom:3.5rem}
 .rsvp-head h2{font-family:var(--ff-ser);font-style:italic;font-weight:300;font-size:clamp(3rem,8vw,7rem);line-height:.9;color:var(--white);margin-bottom:.5rem}
-.rsvp-deadline{font-family:var(--ff-ui);font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.3)}
+.rsvp-deadline{font-family:var(--ff-ui);font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold)}
 .rsvp-deadline strong{color:var(--gold)}
 .rsvp-box{background:var(--off);max-width:640px;margin:0 auto;padding:2.5rem;position:relative}
 
@@ -443,13 +433,10 @@ footer p{font-family:var(--ff-ui);font-size:.68rem;color:var(--sage);letter-spac
   .dc-col:first-child{border-bottom:1px solid rgba(10,18,10,.12)}
   .swatches{grid-template-columns:repeat(3,1fr)}
   /* barra dorada + nav forman una sola cabecera continua */
-  #nav{
-    padding:.55rem 1rem;
-    background:var(--dkgreen);
-    border-bottom:1px solid rgba(196,164,74,.2);
+  #std-bar{
+    padding:.6rem 1rem;flex-wrap:nowrap;
   }
-  #nav.solid{background:var(--dkgreen)}
-  .hamburger{padding:.5rem .55rem;gap:4px;background:transparent}
+  .hamburger{padding:.5rem .55rem;gap:4px}
   .hamburger span{width:21px;height:2px}
   .nav-ul{display:none;flex-direction:column;position:absolute;top:100%;left:0;width:100%;background:rgba(8,8,8,.98);padding:1.5rem;gap:1.2rem;border-bottom:1px solid rgba(196,164,74,.2)}
   .nav-ul.open{display:flex}
@@ -516,7 +503,7 @@ footer p{font-family:var(--ff-ui);font-size:.68rem;color:var(--sage);letter-spac
 /* ── Bloque de informaci&oacute;n bajo el banner ── */
 .info-below{max-width:920px;margin:0 auto;padding:4vh 2rem 8vh;text-align:center}
 .info-grid{
-  display:grid;grid-template-columns:repeat(3,1fr);gap:.8rem;
+  display:grid;grid-template-columns:repeat(2,1fr);gap:.8rem;
   margin-top:2.2rem;text-align:left;
 }
 
@@ -560,11 +547,9 @@ footer p{font-family:var(--ff-ui);font-size:.68rem;color:var(--sage);letter-spac
 
 
 
-<!-- ── SAVE THE DATE (fija arriba) ── -->
-<div id="std-bar"><span data-i18n="std.bar">Save the Date — 28 de mayo de 2027</span></div>
-
-<!-- ── NAV (solo links, sin logo) ── -->
-<nav id="nav">
+<!-- ── SAVE THE DATE + NAV (barra fija superior unificada) ── -->
+<div id="std-bar">
+  <span class="std-text" data-i18n="std.bar">Save the Date — 28 de mayo de 2027</span>
   <button class="hamburger" onclick="toggleNav()"><span></span><span></span><span></span></button>
   <ul class="nav-ul" id="nav-ul">
     <li data-section="narrative"><a href="#narrative" onclick="closeNav()" data-i18n="nav.story">Historia</a></li>
@@ -580,7 +565,7 @@ footer p{font-family:var(--ff-ui);font-size:.68rem;color:var(--sage);letter-spac
       </div>
     </li>
   </ul>
-</nav>
+</div>
 
 
 <!-- ── HERO ── -->
@@ -595,7 +580,7 @@ footer p{font-family:var(--ff-ui);font-size:.68rem;color:var(--sage);letter-spac
   <div class="hero-grain"></div>
   <div class="hero-content">
     <h1 class="hero-h1">
-      <span class="ln" id="hL1">Daniel <span class="amp">y</span></span>
+      <span class="ln" id="hL1" data-i18n="hero.line1">Daniel <span class="amp">y</span></span>
       <span class="ln" id="hL2">Fernando</span>
     </h1>
     <div class="hero-meta">
@@ -643,7 +628,7 @@ footer p{font-family:var(--ff-ui);font-size:.68rem;color:var(--sage);letter-spac
       <div class="stu" data-reveal>
         <span class="s-tag-gold" data-i18n="story2.tag">El lugar</span>
         <h2 class="s-headline s-headline--sm" data-i18n="story2.h2">El Castillo<br>de Batres.</h2>
-        <p class="s-body" data-i18n="story2.p1">A cuarenta y cinco minutos de Madrid se encuentra este castillo del siglo XV, rodeado de jardines y muros de piedra que han sido testigos del paso del tiempo. Aqu&iacute; vivi&oacute; Garcilaso de la Vega, quien hall&oacute; entre estos muros la inspiraci&oacute;n para algunas de sus &eacute;glogas m&aacute;s c&eacute;lebres. Sus versos nos recuerdan, a&uacute;n hoy, la importancia de atender al presente: <em>&laquo;Coged de vuestra alegre primavera el dulce fruto&raquo;</em> (Soneto XXIII).</p>
+        <p class="s-body" data-i18n="story2.p1">A cuarenta y cinco minutos de Madrid se encuentra este castillo del siglo XV, rodeado de jardines y muros de piedra que han sido testigos del paso del tiempo. Aqu&iacute; vivi&oacute; Garcilaso de la Vega, quien hall&oacute; entre estos muros la inspiraci&oacute;n para algunas de sus &eacute;glogas m&aacute;s c&eacute;lebres. Sus versos nos recuerdan, a&uacute;n hoy, que no hay entrega mayor que la del amor verdadero: <em>&laquo;Yo no nac&iacute; sino para quereros; mi alma os ha cortado a su medida&raquo;</em> (Soneto V).</p>
         <p class="s-body" style="margin-top:1rem" data-i18n="story2.p2">Este lugar tiene para nosotros un significado especial. En su juventud, Paquita, la abuela de Daniel, sol&iacute;a recorrer en bicicleta el camino desde Gri&ntilde;&oacute;n hasta el castillo para pasar aqu&iacute; los d&iacute;as de verano. Nos hace especial ilusi&oacute;n volver a este mismo lugar para comenzar nuestra propia historia, uniendo pasado y presente en un escenario que se abrir&aacute; ante nosotros como el lugar donde empezar a escribir nuestro futuro.</p>
         <div class="info-inline">
           <div class="map-card">
@@ -652,10 +637,6 @@ footer p{font-family:var(--ff-ui);font-size:.68rem;color:var(--sage);letter-spac
               <span class="map-card-addr" data-i18n="story2.mapaddr">Batres, 28909 Madrid &middot; 45 min del centro</span>
             </div>
             <a class="map-card-btn" href="https://maps.google.com/?q=Castillo+de+Batres+Madrid" target="_blank" data-i18n="story2.mapbtn">Abrir en Google Maps &rarr;</a>
-          </div>
-          <div class="ii-card">
-            <strong data-i18n="story2.bustitle">&#128652; Autob&uacute;s desde Madrid</strong>
-            <p data-i18n="story2.busp">Salida desde Madrid hacia el castillo (pendiente de confirmar lugar)</p>
           </div>
         </div>
       </div>
@@ -678,19 +659,23 @@ footer p{font-family:var(--ff-ui);font-size:.68rem;color:var(--sage);letter-spac
   <!-- Bloque 3c: informaci&oacute;n pr&aacute;ctica, debajo del banner -->
   <div class="info-below stu" data-reveal>
     <span class="s-tag-gold" data-i18n="info.tag">Informaci&oacute;n pr&aacute;ctica</span>
-    <h2 class="s-headline s-headline--sm" data-i18n="info.h2">Todo lo que<br>necesitas saber.</h2>
+    <h2 class="s-headline s-headline--sm" data-i18n="info.h2">Todo lo que<br>necesitas saber</h2>
     <div class="info-grid">
       <div class="ii-card">
         <strong data-i18n="info.stay.title">&#127976; Alojamiento</strong>
-        <p data-i18n="info.stay.p">Si ven&iacute;s de fuera, avisadnos antes de reservar e indicadlo al confirmar.</p>
+        <p data-i18n="info.stay.p">Si ven&iacute;s de fuera, quedamos a vuestra disposici&oacute;n para recomendaros alojamiento cercano; bastar&aacute; con que nos lo indiqu&eacute;is al confirmar vuestra asistencia.</p>
       </div>
       <div class="ii-card">
-        <strong data-i18n="info.gift.title">&#127873; Lista de bodas</strong>
+        <strong data-i18n="info.bus.title">&#128652; Desplazamiento</strong>
+        <p data-i18n="info.bus.p">Dispondremos de autob&uacute;s: un trayecto de ida hasta el castillo y dos de vuelta a Madrid (pendiente de confirmar ubicaci&oacute;n y hora).</p>
+      </div>
+      <div class="ii-card">
+        <strong data-i18n="info.gift.title">&#127873; Regalos</strong>
         <p data-i18n="info.gift.p">No es necesario, pero si dese&aacute;is contribuir con un detalle, preferimos una aportaci&oacute;n econ&oacute;mica a un regalo material: <strong>ES82 0049 2674 5125 1441 6013</strong></p>
       </div>
       <div class="ii-card">
         <strong data-i18n="info.contact.title">&#128222; Contacto</strong>
-        <p data-i18n="info.contact.p">Daniel: <a href="tel:+34645516876">645 516 876</a> &middot; Fernando: <a href="tel:+34649485472">649 485 472</a></p>
+        <p data-i18n="info.contact.p">Daniel: <a href="tel:+34645516876">645 516 876</a><br>Fernando: <a href="tel:+34649485472">649 485 472</a></p>
       </div>
     </div>
   </div>
@@ -711,7 +696,7 @@ footer p{font-family:var(--ff-ui);font-size:.68rem;color:var(--sage);letter-spac
     <div class="dc-cols fi">
       <div class="dc-col">
         <h3 data-i18n="dc.women.title">Ellas</h3>
-        <p data-i18n="dc.women.p">Vestido largo de noche (no midi).<br>Tejidos fluidos o estructurados, en tonos elegantes; blancos y negros incluidos.<br>Las lentejuelas, bordados y brillos sutiles son bienvenidos.<br>Joyería con carácter, ya sea discreta o más marcada.</p>
+        <p data-i18n="dc.women.p">Vestido largo de noche (no midi).<br>Tejidos fluidos o estructurados, en tonos elegantes; blancos y negros incluidos.<br>Las lentejuelas, bordados y brillos sutiles son bienvenidos.</p>
       </div>
       <div class="dc-col">
         <h3 data-i18n="dc.men.title">Ellos</h3>
@@ -822,6 +807,7 @@ const TRANSLATIONS = {
     'login.err':'La contraseña no es correcta',
     'hero.date':'Viernes 28 de mayo de 2027',
     'hero.place':'Castillo de Batres',
+    'hero.line1':'Daniel <span class="amp">y</span>',
     'cd.days':'Días','cd.hours':'Horas','cd.mins':'Minutos','cd.secs':'Segundos',
     'cd.today':'¡Hoy es el día!',
     'story1.tag':'Nuestra historia',
@@ -830,30 +816,30 @@ const TRANSLATIONS = {
     'story1.p2':'Un a&ntilde;o y poco m&aacute;s tarde, el tiempo juntos se ha convertido en viajes, en risas a destiempo, en madrugadas largas, en proyectos compartidos y en la certeza silenciosa de que el otro siempre estar&aacute; ah&iacute;. Por eso, en la &uacute;ltima escapada a Barcelona sucedi&oacute; la pedida, &iquest;para qu&eacute; esperar m&aacute;s cuando los dos lo tenemos claro?',
     'story2.tag':'El lugar',
     'story2.h2':'El Castillo<br>de Batres.',
-    'story2.p1':'A cuarenta y cinco minutos de Madrid se encuentra este castillo del siglo XV, rodeado de jardines y muros de piedra que han sido testigos del paso del tiempo. Aqu&iacute; vivi&oacute; Garcilaso de la Vega, quien hall&oacute; entre estos muros la inspiraci&oacute;n para algunas de sus &eacute;glogas m&aacute;s c&eacute;lebres. Sus versos nos recuerdan, a&uacute;n hoy, la importancia de atender al presente: <em>&laquo;Coged de vuestra alegre primavera el dulce fruto&raquo;</em> (Soneto XXIII).',
+    'story2.p1':'A cuarenta y cinco minutos de Madrid se encuentra este castillo del siglo XV, rodeado de jardines y muros de piedra que han sido testigos del paso del tiempo. Aqu&iacute; vivi&oacute; Garcilaso de la Vega, quien hall&oacute; entre estos muros la inspiraci&oacute;n para algunas de sus &eacute;glogas m&aacute;s c&eacute;lebres. Sus versos nos recuerdan, a&uacute;n hoy, que no hay entrega mayor que la del amor verdadero: <em>&laquo;Yo no nac&iacute; sino para quereros; mi alma os ha cortado a su medida&raquo;</em> (Soneto V).',
     'story2.p2':'Este lugar tiene para nosotros un significado especial. En su juventud, Paquita, la abuela de Daniel, sol&iacute;a recorrer en bicicleta el camino desde Gri&ntilde;&oacute;n hasta el castillo para pasar aqu&iacute; los d&iacute;as de verano. Nos hace especial ilusi&oacute;n volver a este mismo lugar para comenzar nuestra propia historia, uniendo pasado y presente en un escenario que se abrir&aacute; ante nosotros como el lugar donde empezar a escribir nuestro futuro.',
     'story2.maplabel':'&#128205; Castillo de Batres',
     'story2.mapaddr':'Batres, 28909 Madrid &middot; 45 min del centro',
     'story2.mapbtn':'Abrir en Google Maps &rarr;',
-    'story2.bustitle':'&#128652; Autob&uacute;s desde Madrid',
-    'story2.busp':'Salida desde Madrid hacia el castillo (pendiente de confirmar lugar)',
     'night.tag':'As&iacute; ser&aacute; la noche',
     'night.h2':'Una velada<br>para recordar.',
     'night.p':'Cena a la luz de las velas, jardines iluminados y m&uacute;sica que nos acompa&ntilde;ar&aacute; hasta bien entrada la noche. Queremos una celebraci&oacute;n elegante y viva, de esas que se alargan sin darse cuenta.',
     'info.tag':'Informaci&oacute;n pr&aacute;ctica',
-    'info.h2':'Todo lo que<br>necesitas saber.',
+    'info.h2':'Todo lo que<br>necesitas saber',
     'info.stay.title':'&#127976; Alojamiento',
-    'info.stay.p':'Si ven&iacute;s de fuera, avisadnos antes de reservar e indicadlo al confirmar.',
-    'info.gift.title':'&#127873; Lista de bodas',
+    'info.stay.p':'Si ven&iacute;s de fuera, quedamos a vuestra disposici&oacute;n para recomendaros alojamiento cercano; bastar&aacute; con que nos lo indiqu&eacute;is al confirmar vuestra asistencia.',
+    'info.bus.title':'&#128652; Desplazamiento',
+    'info.bus.p':'Dispondremos de autob&uacute;s: un trayecto de ida hasta el castillo y dos de vuelta a Madrid (pendiente de confirmar ubicaci&oacute;n y hora).',
+    'info.gift.title':'&#127873; Regalos',
     'info.gift.p':'No es necesario, pero si dese&aacute;is contribuir con un detalle, preferimos una aportaci&oacute;n econ&oacute;mica a un regalo material: <strong>ES82 0049 2674 5125 1441 6013</strong>',
     'info.contact.title':'&#128222; Contacto',
-    'info.contact.p':'Daniel: <a href="tel:+34645516876">645 516 876</a> &middot; Fernando: <a href="tel:+34649485472">649 485 472</a>',
+    'info.contact.p':'Daniel: <a href="tel:+34645516876">645 516 876</a><br>Fernando: <a href="tel:+34649485472">649 485 472</a>',
     'dc.label':'Cómo venir',
     'dc.title':'Dress Code',
     'dc.intro1':'Nos hace ilusión que la ocasión tenga un aire clásico, inspirado en las grandes veladas de otra época: aquellas en las que cada detalle invitaba a vestirse con especial cuidado.',
     'dc.intro2':'¿Dudas con la etiqueta? Fernando está al otro lado para lo que necesitéis (<a href="tel:+34649485472" style="color:var(--midgreen)">649 485 472</a>).',
     'dc.women.title':'Ellas',
-    'dc.women.p':'Vestido largo de noche (no midi).<br>Tejidos fluidos o estructurados, en tonos elegantes; blancos y negros incluidos.<br>Las lentejuelas, bordados y brillos sutiles son bienvenidos.<br>Joyería con carácter, ya sea discreta o más marcada.',
+    'dc.women.p':'Vestido largo de noche (no midi).<br>Tejidos fluidos o estructurados, en tonos elegantes; blancos y negros incluidos.<br>Las lentejuelas, bordados y brillos sutiles son bienvenidos.',
     'dc.men.title':'Ellos',
     'dc.men.p':'Esmoquin negro clásico.<br>Pajarita negra.<br>Camisa blanca y zapatos negros.',
     'dc.men.note':'Si alquiláis el esmoquin en cualquier tienda <strong>Bon Vivant</strong>, tenéis un descuento de <strong>10€</strong> indicando «Boda Fer y Dani».',
@@ -876,6 +862,7 @@ const TRANSLATIONS = {
     'login.err':'Incorrect password',
     'hero.date':'Friday, May 28, 2027',
     'hero.place':'Castillo de Batres',
+    'hero.line1':'Daniel <span class="amp">&amp;</span>',
     'cd.days':'Days','cd.hours':'Hours','cd.mins':'Minutes','cd.secs':'Seconds',
     'cd.today':'Today is the day!',
     'story1.tag':'Our story',
@@ -884,30 +871,30 @@ const TRANSLATIONS = {
     'story1.p2':'A little over a year later, our time together has become trips, out-of-sync laughter, long nights, shared projects, and the quiet certainty that the other will always be there. That&rsquo;s why, on our last getaway to Barcelona, the proposal happened &mdash; why wait any longer when we&rsquo;re both so sure?',
     'story2.tag':'The venue',
     'story2.h2':'Castillo<br>de Batres.',
-    'story2.p1':'Forty-five minutes from Madrid stands this 15th-century castle, surrounded by gardens and stone walls that have witnessed the passage of time. Garcilaso de la Vega once lived here, finding within these walls the inspiration for some of his most celebrated eclogues. His verses still remind us today of the importance of living in the present: <em>&laquo;Gather the sweet fruit of your joyful spring&raquo;</em> (Sonnet XXIII).',
+    'story2.p1':'Forty-five minutes from Madrid stands this 15th-century castle, surrounded by gardens and stone walls that have witnessed the passage of time. Garcilaso de la Vega once lived here, finding within these walls the inspiration for some of his most celebrated eclogues. His verses still remind us today that no gift is greater than true love: <em>&laquo;I was born only to love you; my soul was shaped to fit you&raquo;</em> (Sonnet V).',
     'story2.p2':'This place holds a special meaning for us. In her youth, Paquita, Daniel&rsquo;s grandmother, used to cycle from Griñón to the castle to spend her summer days here. It fills us with joy to return to this very place to begin our own story, joining past and present in a setting that will unfold before us as the place where we start writing our future.',
     'story2.maplabel':'&#128205; Castillo de Batres',
     'story2.mapaddr':'Batres, 28909 Madrid &middot; 45 min from the centre',
     'story2.mapbtn':'Open in Google Maps &rarr;',
-    'story2.bustitle':'&#128652; Bus from Madrid',
-    'story2.busp':'Departure from Madrid to the castle (pick-up point to be confirmed)',
     'night.tag':'The evening ahead',
     'night.h2':'An evening<br>to remember.',
     'night.p':'Candlelit dinner, illuminated gardens, and music to carry us well into the night. We want an elegant, lively celebration &mdash; the kind that runs long without anyone noticing.',
     'info.tag':'Practical information',
-    'info.h2':'Everything<br>you need to know.',
+    'info.h2':'Everything<br>you need to know',
     'info.stay.title':'&#127976; Accommodation',
-    'info.stay.p':'If you&rsquo;re coming from out of town, let us know before booking and mention it when you RSVP.',
+    'info.stay.p':'If you&rsquo;re coming from out of town, we&rsquo;re happy to recommend nearby places to stay; just let us know when you RSVP.',
+    'info.bus.title':'&#128652; Transport',
+    'info.bus.p':'A bus service will be available: one outbound trip to the castle and two return trips to Madrid (pick-up point and time to be confirmed).',
     'info.gift.title':'&#127873; Gifts',
     'info.gift.p':'It&rsquo;s not necessary, but if you&rsquo;d like to contribute with something, we&rsquo;d prefer a monetary gift over a material one: <strong>ES82 0049 2674 5125 1441 6013</strong>',
     'info.contact.title':'&#128222; Contact',
-    'info.contact.p':'Daniel: <a href="tel:+34645516876">+34 645 516 876</a> &middot; Fernando: <a href="tel:+34649485472">+34 649 485 472</a>',
+    'info.contact.p':'Daniel: <a href="tel:+34645516876">+34 645 516 876</a><br>Fernando: <a href="tel:+34649485472">+34 649 485 472</a>',
     'dc.label':'What to wear',
     'dc.title':'Dress Code',
     'dc.intro1':'We&rsquo;d love the occasion to have a classic feel, inspired by the grand evenings of another era &mdash; the kind where every detail called for getting dressed with special care.',
     'dc.intro2':'Any doubts about the dress code? Fernando is happy to help with whatever you need (<a href="tel:+34649485472" style="color:var(--midgreen)">+34 649 485 472</a>).',
     'dc.women.title':'Women',
-    'dc.women.p':'Long evening gown (no midi length).<br>Flowing or structured fabrics, in elegant tones; whites and blacks included.<br>Sequins, embroidery and subtle sparkle are welcome.<br>Jewellery with character, whether understated or bold.',
+    'dc.women.p':'Long evening gown (no midi length).<br>Flowing or structured fabrics, in elegant tones; whites and blacks included.<br>Sequins, embroidery and subtle sparkle are welcome.',
     'dc.men.title':'Men',
     'dc.men.p':'Classic black tuxedo.<br>Black bow tie.<br>White shirt and black shoes.',
     'dc.men.note':'If you rent your tuxedo at any <strong>Bon Vivant</strong> store, you get a <strong>&euro;10</strong> discount by mentioning &laquo;Boda Fer y Dani&raquo;.',
@@ -1052,10 +1039,7 @@ function initCursor(){
 }
 
 /* ── NAV ── */
-function initNav(){
-  const nav=document.getElementById('nav');
-  window.addEventListener('scroll',()=>nav.classList.toggle('solid',scrollY>60),{passive:true});
-}
+function initNav(){}
 function toggleNav(){document.getElementById('nav-ul').classList.toggle('open');}
 function closeNav(){document.getElementById('nav-ul').classList.remove('open');}
 
