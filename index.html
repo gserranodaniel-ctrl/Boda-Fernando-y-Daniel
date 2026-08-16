@@ -482,9 +482,12 @@ footer p{font-family:var(--ff-ui);font-size:.68rem;color:var(--sage);letter-spac
   margin-right:calc(50% - 50vw);
   position:relative;
   overflow:hidden;
-  /* iOS Safari NO recorta con overflow:hidden los hijos animados/compuestos
-     (el carrusel). contain:paint + clip-path fuerzan un recorte que si respeta. */
-  contain:paint;
+  /* CLAVE: contain:layout aisla la maquetacion interna, asi el enorme ancho de la
+     tira NO puede propagarse y ensanchar la pagina en ningun navegador (incl. Safari).
+     transform:translateZ(0) le da capa propia para que iOS recorte hijos animados. */
+  contain:layout paint;
+  transform:translateZ(0);
+  -webkit-transform:translateZ(0);
   clip-path:inset(0);
   background:var(--dkgreen);
   border-top:1px solid rgba(196,164,74,.22);
