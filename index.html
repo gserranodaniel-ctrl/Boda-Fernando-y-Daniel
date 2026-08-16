@@ -17,8 +17,8 @@
   --ff-ui:'Cormorant Garamond',Georgia,serif;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;font-size:17px}
-body{font-family:var(--ff-eb);background:var(--off);color:var(--td);overflow-x:hidden;cursor:none}
+html{scroll-behavior:smooth;font-size:17px;overflow-x:hidden;max-width:100%}
+body{font-family:var(--ff-eb);background:var(--off);color:var(--td);overflow-x:hidden;width:100%;max-width:100%;position:relative;cursor:none}
 img{display:block;max-width:100%}
 a{color:inherit;text-decoration:none}
 button{font-family:var(--ff-ui);cursor:none}
@@ -117,6 +117,7 @@ button{font-family:var(--ff-ui);cursor:none}
   font-family:var(--ff-ui);font-size:.55rem;font-weight:400;
   letter-spacing:.22em;text-transform:uppercase;color:var(--gold);
   white-space:nowrap;line-height:1;
+  min-width:0;overflow:hidden;text-overflow:ellipsis;
 }
 @media(max-width:640px){
   .std-text{font-size:.56rem;letter-spacing:.1em}
@@ -145,7 +146,7 @@ button{font-family:var(--ff-ui);cursor:none}
 .nav-ul li.active a{color:var(--gold)}
 
 .hamburger{
-  display:none;flex-direction:column;gap:4px;cursor:pointer;
+  display:none;flex-direction:column;gap:4px;cursor:pointer;flex-shrink:0;
   background:rgba(255,255,255,.06);border:1px solid var(--gold);
   padding:.5rem .55rem;
   transition:background .3s,border-color .3s;
@@ -290,7 +291,7 @@ button{font-family:var(--ff-ui);cursor:none}
 .s-headline--sm{font-size:clamp(1.8rem,3vw,3rem)}
 .s-headline-sm{font-size:clamp(1.8rem,3vw,3rem)!important}
 .s-body{font-family:var(--ff-eb);font-size:1rem;line-height:1.9;color:var(--tm);max-width:320px}
-.s-body strong{color:var(--td);font-weight:500}
+.s-body strong{color:var(--td);font-weight:600}
 .s-firma{font-family:var(--ff-eb);font-style:italic;font-size:1rem;color:var(--ltgreen);margin-top:1.2rem}
 /* inline info cards within narrative */
 .info-inline{margin-top:1.2rem;display:flex;flex-direction:column;gap:.6rem;max-width:320px}
@@ -335,6 +336,10 @@ button{font-family:var(--ff-ui);cursor:none}
 .dc-col:first-child{border-right:1px solid rgba(10,18,10,.18)}
 .dc-col h3{font-family:var(--ff-ui);font-size:.6rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:1.3rem}
 .dc-col p{font-family:var(--ff-eb);font-size:1rem;line-height:1.95;color:var(--td)}
+.dc-list{list-style:none;margin:0;padding:0;text-align:left}
+.dc-list li{position:relative;padding-left:1.2rem;margin-bottom:.6rem;font-family:var(--ff-eb);font-size:1rem;line-height:1.6;color:var(--td)}
+.dc-list li:last-child{margin-bottom:0}
+.dc-list li::before{content:'';position:absolute;left:0;top:.6em;width:5px;height:5px;background:var(--gold);transform:rotate(45deg)}
 .dc-note{font-family:var(--ff-eb);font-style:italic;font-size:.92rem;color:var(--tm);margin-top:1rem;padding:1rem;background:rgba(0,51,32,.06);border-left:2px solid var(--gold)}
 .dc-wilde{font-family:var(--ff-eb);font-style:italic;font-size:1.15rem;color:var(--tm);text-align:center;margin:1.5rem auto 0;max-width:600px;line-height:1.8}
 .swatches{display:grid;grid-template-columns:repeat(6,1fr);gap:.6rem;max-width:760px;margin:0 auto}
@@ -614,9 +619,9 @@ footer p{font-family:var(--ff-ui);font-size:.68rem;color:var(--sage);letter-spac
       <div class="stu" data-reveal>
         <span class="s-tag-gold" data-i18n="story2.tag">El Evento</span>
         <h2 class="s-headline s-headline--sm" data-i18n="story2.h2">¡Nos Casamos!</h2>
-        <p class="s-body" data-i18n="story2.p0">Fernando lleg&oacute; tarde a la primera cita, y esa espera se convirti&oacute; en el comienzo de la mejor historia que pod&iacute;amos imaginar. Desde entonces, viajes, risas y la certeza de que el otro siempre estar&aacute; ah&iacute; nos han tra&iacute;do hasta aqu&iacute;: en nuestra &uacute;ltima escapada a Barcelona lleg&oacute; el momento de decir que s&iacute;.</p>
-        <p class="s-body" style="margin-top:1rem" data-i18n="story2.p1">Y para celebrar ese s&iacute; queremos un lugar a la altura del momento. A cuarenta y cinco minutos de Madrid se encuentra este castillo del siglo XV, rodeado de jardines y muros de piedra que han sido testigos del paso del tiempo. Aqu&iacute; vivi&oacute; Garcilaso de la Vega, quien hall&oacute; entre estos muros la inspiraci&oacute;n para algunas de sus &eacute;glogas m&aacute;s c&eacute;lebres. Sus versos nos recuerdan, a&uacute;n hoy, que no hay entrega mayor que la del amor verdadero: <em>&laquo;Yo no nac&iacute; sino para quereros; mi alma os ha cortado a su medida&raquo;</em> (Soneto V).</p>
-        <p class="s-body" style="margin-top:1rem" data-i18n="story2.p2">Este lugar tiene para nosotros un significado especial. En su juventud, Paquita, la abuela de Daniel, sol&iacute;a recorrer en bicicleta el camino desde Gri&ntilde;&oacute;n hasta el castillo para pasar aqu&iacute; los d&iacute;as de verano. Nos hace especial ilusi&oacute;n volver a este mismo lugar para comenzar nuestra propia historia, uniendo pasado y presente en un escenario que se abrir&aacute; ante nosotros como el lugar donde empezar a escribir nuestro futuro.</p>
+        <p class="s-body" data-i18n="story2.p0">Fernando lleg&oacute; tarde a la primera cita, y ese tiempo en el que Daniel estuvo esperando se convirti&oacute; en el comienzo de <strong>la mejor historia que pod&iacute;amos imaginar</strong>. Desde entonces, viajes, risas y la certeza de que el otro siempre estar&aacute; ah&iacute; nos han tra&iacute;do hasta aqu&iacute;: en nuestra &uacute;ltima escapada a Barcelona lleg&oacute; el momento de <strong>decir que &laquo;s&iacute;&raquo;</strong>.</p>
+        <p class="s-body" style="margin-top:1rem" data-i18n="story2.p1">Y para celebrar ese s&iacute; queremos un lugar a la altura del momento. A cuarenta y cinco minutos de Madrid se encuentra este <strong>castillo del siglo XV</strong>, rodeado de jardines y muros de piedra que han sido testigos del paso del tiempo. Aqu&iacute; vivi&oacute; Garcilaso de la Vega, quien hall&oacute; entre estos muros la inspiraci&oacute;n para algunas de sus &eacute;glogas m&aacute;s c&eacute;lebres. Sus versos nos recuerdan, a&uacute;n hoy, que no hay entrega mayor que la del amor verdadero: <em>&laquo;Yo no nac&iacute; sino para quereros; mi alma os ha cortado a su medida&raquo;</em> (Soneto V).</p>
+        <p class="s-body" style="margin-top:1rem" data-i18n="story2.p2">Este lugar tambi&eacute;n tiene para nosotros un significado especial. En su juventud, Paquita, la abuela de Daniel, sol&iacute;a recorrer en bicicleta el camino desde Gri&ntilde;&oacute;n hasta el castillo para pasar aqu&iacute; los d&iacute;as de verano. Por eso nos hace tanta ilusi&oacute;n volver aqu&iacute; para comenzar nuestra propia historia.</p>
         <div class="info-inline">
           <div class="map-card">
             <div class="map-card-top">
@@ -634,7 +639,7 @@ footer p{font-family:var(--ff-ui);font-size:.68rem;color:var(--sage);letter-spac
   <div class="story-intro stu" data-reveal>
     <span class="s-tag-gold" data-i18n="night.tag">As&iacute; ser&aacute; la noche</span>
     <h2 class="s-headline s-headline--sm" data-i18n="night.h2">Una velada<br>para recordar</h2>
-    <p class="s-body" data-i18n="night.p">Cena a la luz de las velas, jardines iluminados y m&uacute;sica que nos acompa&ntilde;ar&aacute; hasta bien entrada la noche. Queremos una celebraci&oacute;n elegante y viva, de esas que se alargan sin darse cuenta.</p>
+    <p class="s-body" data-i18n="night.p">Cena a la luz de las velas, jardines iluminados y m&uacute;sica que nos acompa&ntilde;ar&aacute; hasta bien entrada la noche. <strong>Queremos una celebraci&oacute;n elegante y viva</strong>, de esas que se alargan sin darse cuenta.</p>
     <div class="quad-grid">
       <img src="Fiesta0.jpeg" alt="" onclick="openLb(this.src)">
       <img src="Fiesta3.jpeg" alt="" onclick="openLb(this.src)">
@@ -650,7 +655,7 @@ footer p{font-family:var(--ff-ui);font-size:.68rem;color:var(--sage);letter-spac
     <div class="info-grid">
       <div class="ii-card">
         <strong data-i18n="info.stay.title">&#127976; Alojamiento</strong>
-        <p data-i18n="info.stay.p">Si ven&iacute;s de fuera, quedamos a vuestra disposici&oacute;n para recomendaros alojamiento cercano; bastar&aacute; con que nos lo indiqu&eacute;is al confirmar vuestra asistencia.</p>
+        <p data-i18n="info.stay.p">Si ven&iacute;s de fuera, quedamos a vuestra disposici&oacute;n para recomendaros alojamiento; bastar&aacute; con que nos lo indiqu&eacute;is al confirmar vuestra asistencia.</p>
       </div>
       <div class="ii-card">
         <strong data-i18n="info.bus.title">&#128652; Desplazamiento</strong>
@@ -677,18 +682,18 @@ footer p{font-family:var(--ff-ui);font-size:.68rem;color:var(--sage);letter-spac
     <h2 class="s-title dark fi"><em data-i18n="dc.title">Dress Code</em><br><span style="font-size:clamp(1.2rem,2.5vw,2rem);letter-spacing:.15em;font-style:normal;font-weight:300">Black Tie</span></h2>
     <div class="rule-c fi"><div class="rl" style="background:rgba(10,18,10,.25)"></div><div class="dia"></div><div class="rl" style="background:rgba(10,18,10,.25)"></div></div>
     <div class="dc-intro fi">
-      <p data-i18n="dc.intro1">Nos hace ilusión que la ocasión tenga un aire clásico, inspirado en las grandes veladas de otra época: aquellas en las que cada detalle invitaba a vestirse con especial cuidado.</p>
+      <p data-i18n="dc.intro1">Nos hace ilusión que la ocasión tenga un <strong>aire clásico</strong>, inspirado en las grandes veladas de otra época: aquellas en las que cada detalle invitaba a vestirse con especial cuidado.</p>
       <p style="font-family:var(--ff-eb);font-size:.92rem;color:var(--tm);line-height:1.9;margin-top:.8rem" data-i18n="dc.intro2">¿Dudas con la etiqueta? Fernando está al otro lado para lo que necesitéis (<a href="tel:+34649485472" style="color:var(--midgreen)">649 485 472</a>).</p>
     </div>
     <div class="dc-cols fi">
       <div class="dc-col">
         <h3 data-i18n="dc.women.title">Ellas</h3>
-        <p data-i18n="dc.women.p">Vestido largo de noche (no midi).<br>Tejidos fluidos o estructurados, en tonos elegantes; blancos y negros incluidos.<br>Las lentejuelas, bordados y brillos sutiles son bienvenidos.</p>
+        <ul class="dc-list" data-i18n="dc.women.p"><li>Vestido largo de noche (no midi).</li><li>Tejidos fluidos o estructurados, en tonos elegantes; blancos y negros incluidos.</li><li>Lentejuelas, bordados y brillos sutiles son bienvenidos.</li></ul>
       </div>
       <div class="dc-col">
         <h3 data-i18n="dc.men.title">Ellos</h3>
-        <p data-i18n="dc.men.p">Esmoquin negro clásico.<br>Pajarita negra.<br>Camisa blanca y zapatos negros.</p>
-        <p class="dc-note" data-i18n="dc.men.note">Si alquiláis el esmoquin en cualquier tienda <strong>Bon Vivant</strong>, tenéis un descuento de <strong>10€</strong> indicando «Boda Fer y Dani».</p>
+        <ul class="dc-list" data-i18n="dc.men.p"><li>Esmoquin negro clásico.</li><li>Pajarita negra.</li><li>Camisa blanca y zapatos negros.</li></ul>
+        <p class="dc-note" data-i18n="dc.men.note">Si alquiláis el esmoquin en cualquier tienda <a href="https://chaquesbonvivant.com/" target="_blank" rel="noopener" style="color:var(--midgreen);border-bottom:1px solid rgba(0,51,32,.3)"><strong>Bon Vivant</strong></a>, tenéis un descuento de <strong>10€</strong> indicando «Boda Fer y Dani».</p>
       </div>
     </div>
     <p class="dc-wilde fi" style="margin-bottom:2.5rem" data-i18n="dc.wilde">Como recordaba Oscar Wilde: <em>«Uno debería estar siempre un poco demasiado bien vestido».</em></p>
@@ -759,6 +764,7 @@ const PWD='BodaF&D_2027';
 const RSVP_FORMS={es:'261023433093043',en:'262272648273361'};
 
 window.onload=()=>{
+  if('scrollRestoration' in history){history.scrollRestoration='manual';}
   document.getElementById('lp').addEventListener('keydown',e=>{if(e.key==='Enter')doLogin();});
   initLang();
 
@@ -805,19 +811,19 @@ const TRANSLATIONS = {
     'cd.today':'¡Hoy es el día!',
     'story2.tag':'El Evento',
     'story2.h2':'¡Nos Casamos!',
-    'story2.p0':'Fernando lleg&oacute; tarde a la primera cita, y esa espera se convirti&oacute; en el comienzo de la mejor historia que pod&iacute;amos imaginar. Desde entonces, viajes, risas y la certeza de que el otro siempre estar&aacute; ah&iacute; nos han tra&iacute;do hasta aqu&iacute;: en nuestra &uacute;ltima escapada a Barcelona lleg&oacute; el momento de decir que s&iacute;.',
-    'story2.p1':'Y para celebrar ese s&iacute; queremos un lugar a la altura del momento. A cuarenta y cinco minutos de Madrid se encuentra este castillo del siglo XV, rodeado de jardines y muros de piedra que han sido testigos del paso del tiempo. Aqu&iacute; vivi&oacute; Garcilaso de la Vega, quien hall&oacute; entre estos muros la inspiraci&oacute;n para algunas de sus &eacute;glogas m&aacute;s c&eacute;lebres. Sus versos nos recuerdan, a&uacute;n hoy, que no hay entrega mayor que la del amor verdadero: <em>&laquo;Yo no nac&iacute; sino para quereros; mi alma os ha cortado a su medida&raquo;</em> (Soneto V).',
-    'story2.p2':'Este lugar tiene para nosotros un significado especial. En su juventud, Paquita, la abuela de Daniel, sol&iacute;a recorrer en bicicleta el camino desde Gri&ntilde;&oacute;n hasta el castillo para pasar aqu&iacute; los d&iacute;as de verano. Nos hace especial ilusi&oacute;n volver a este mismo lugar para comenzar nuestra propia historia, uniendo pasado y presente en un escenario que se abrir&aacute; ante nosotros como el lugar donde empezar a escribir nuestro futuro.',
+    'story2.p0':'Fernando lleg&oacute; tarde a la primera cita, y ese tiempo en el que Daniel estuvo esperando se convirti&oacute; en el comienzo de <strong>la mejor historia que pod&iacute;amos imaginar</strong>. Desde entonces, viajes, risas y la certeza de que el otro siempre estar&aacute; ah&iacute; nos han tra&iacute;do hasta aqu&iacute;: en nuestra &uacute;ltima escapada a Barcelona lleg&oacute; el momento de <strong>decir que &laquo;s&iacute;&raquo;</strong>.',
+    'story2.p1':'Y para celebrar ese s&iacute; queremos un lugar a la altura del momento. A cuarenta y cinco minutos de Madrid se encuentra este <strong>castillo del siglo XV</strong>, rodeado de jardines y muros de piedra que han sido testigos del paso del tiempo. Aqu&iacute; vivi&oacute; Garcilaso de la Vega, quien hall&oacute; entre estos muros la inspiraci&oacute;n para algunas de sus &eacute;glogas m&aacute;s c&eacute;lebres. Sus versos nos recuerdan, a&uacute;n hoy, que no hay entrega mayor que la del amor verdadero: <em>&laquo;Yo no nac&iacute; sino para quereros; mi alma os ha cortado a su medida&raquo;</em> (Soneto V).',
+    'story2.p2':'Este lugar tambi&eacute;n tiene para nosotros un significado especial. En su juventud, Paquita, la abuela de Daniel, sol&iacute;a recorrer en bicicleta el camino desde Gri&ntilde;&oacute;n hasta el castillo para pasar aqu&iacute; los d&iacute;as de verano. Por eso nos hace tanta ilusi&oacute;n volver aqu&iacute; para comenzar nuestra propia historia.',
     'story2.maplabel':'&#128205; Castillo de Batres',
     'story2.mapaddr':'Batres, 28909 Madrid &middot; 45 min del centro',
     'story2.mapbtn':'Abrir en Google Maps &rarr;',
     'night.tag':'As&iacute; ser&aacute; la noche',
     'night.h2':'Una velada<br>para recordar',
-    'night.p':'Cena a la luz de las velas, jardines iluminados y m&uacute;sica que nos acompa&ntilde;ar&aacute; hasta bien entrada la noche. Queremos una celebraci&oacute;n elegante y viva, de esas que se alargan sin darse cuenta.',
+    'night.p':'Cena a la luz de las velas, jardines iluminados y m&uacute;sica que nos acompa&ntilde;ar&aacute; hasta bien entrada la noche. <strong>Queremos una celebraci&oacute;n elegante y viva</strong>, de esas que se alargan sin darse cuenta.',
     'info.tag':'Informaci&oacute;n pr&aacute;ctica',
     'info.h2':'Todo lo que<br>necesitas saber',
     'info.stay.title':'&#127976; Alojamiento',
-    'info.stay.p':'Si ven&iacute;s de fuera, quedamos a vuestra disposici&oacute;n para recomendaros alojamiento cercano; bastar&aacute; con que nos lo indiqu&eacute;is al confirmar vuestra asistencia.',
+    'info.stay.p':'Si ven&iacute;s de fuera, quedamos a vuestra disposici&oacute;n para recomendaros alojamiento; bastar&aacute; con que nos lo indiqu&eacute;is al confirmar vuestra asistencia.',
     'info.bus.title':'&#128652; Desplazamiento',
     'info.bus.p':'Dispondremos de autob&uacute;s: un trayecto de ida hasta el castillo y dos de vuelta a Madrid (pendiente de confirmar ubicaci&oacute;n y hora).',
     'info.gift.title':'&#127873; Regalos',
@@ -826,13 +832,13 @@ const TRANSLATIONS = {
     'info.contact.p':'Daniel: <a href="tel:+34645516876">645 516 876</a><br>Fernando: <a href="tel:+34649485472">649 485 472</a>',
     'dc.label':'Cómo venir',
     'dc.title':'Dress Code',
-    'dc.intro1':'Nos hace ilusión que la ocasión tenga un aire clásico, inspirado en las grandes veladas de otra época: aquellas en las que cada detalle invitaba a vestirse con especial cuidado.',
+    'dc.intro1':'Nos hace ilusión que la ocasión tenga un <strong>aire clásico</strong>, inspirado en las grandes veladas de otra época: aquellas en las que cada detalle invitaba a vestirse con especial cuidado.',
     'dc.intro2':'¿Dudas con la etiqueta? Fernando está al otro lado para lo que necesitéis (<a href="tel:+34649485472" style="color:var(--midgreen)">649 485 472</a>).',
     'dc.women.title':'Ellas',
-    'dc.women.p':'Vestido largo de noche (no midi).<br>Tejidos fluidos o estructurados, en tonos elegantes; blancos y negros incluidos.<br>Las lentejuelas, bordados y brillos sutiles son bienvenidos.',
+    'dc.women.p':'<li>Vestido largo de noche (no midi).</li><li>Tejidos fluidos o estructurados, en tonos elegantes; blancos y negros incluidos.</li><li>Lentejuelas, bordados y brillos sutiles son bienvenidos.</li>',
     'dc.men.title':'Ellos',
-    'dc.men.p':'Esmoquin negro clásico.<br>Pajarita negra.<br>Camisa blanca y zapatos negros.',
-    'dc.men.note':'Si alquiláis el esmoquin en cualquier tienda <strong>Bon Vivant</strong>, tenéis un descuento de <strong>10€</strong> indicando «Boda Fer y Dani».',
+    'dc.men.p':'<li>Esmoquin negro clásico.</li><li>Pajarita negra.</li><li>Camisa blanca y zapatos negros.</li>',
+    'dc.men.note':'Si alquiláis el esmoquin en cualquier tienda <a href="https://chaquesbonvivant.com/" target="_blank" rel="noopener" style="color:var(--midgreen);border-bottom:1px solid rgba(0,51,32,.3)"><strong>Bon Vivant</strong></a>, tenéis un descuento de <strong>10€</strong> indicando «Boda Fer y Dani».',
     'dc.wilde':'Como recordaba Oscar Wilde: <em>«Uno debería estar siempre un poco demasiado bien vestido».</em>',
     'pronto.line':'Seguimos trabajando en los detalles del evento. ¡Os iremos avisando tan pronto tengamos novedades!',
     'lb.close':'✕ cerrar',
@@ -858,19 +864,19 @@ const TRANSLATIONS = {
     'cd.today':'Today is the day!',
     'story2.tag':'The Event',
     'story2.h2':'We&rsquo;re Getting Married!',
-    'story2.p0':'Fernando was late to their first date, and that wait became the start of the best story we could have imagined. Since then, trips, laughter, and the certainty that the other will always be there have brought us here &mdash; and on our last getaway to Barcelona, the moment finally came to say yes.',
-    'story2.p1':'And to celebrate that yes, we wanted a place worthy of the moment. Forty-five minutes from Madrid stands this 15th-century castle, surrounded by gardens and stone walls that have witnessed the passage of time. Garcilaso de la Vega once lived here, finding within these walls the inspiration for some of his most celebrated eclogues. His verses still remind us today that no gift is greater than true love: <em>&laquo;I was born only to love you; my soul was shaped to fit you&raquo;</em> (Sonnet V).',
-    'story2.p2':'This place holds a special meaning for us. In her youth, Paquita, Daniel&rsquo;s grandmother, used to cycle from Griñón to the castle to spend her summer days here. It fills us with joy to return to this very place to begin our own story, joining past and present in a setting that will unfold before us as the place where we start writing our future.',
+    'story2.p0':'Fernando was late to their first date, and the time Daniel spent waiting became the start of <strong>the best story we could have imagined</strong>. Since then, trips, laughter, and the certainty that the other will always be there have brought us here &mdash; and on our last getaway to Barcelona, the moment finally came to <strong>say &laquo;yes&raquo;</strong>.',
+    'story2.p1':'And to celebrate that yes, we wanted a place worthy of the moment. Forty-five minutes from Madrid stands this <strong>15th-century castle</strong>, surrounded by gardens and stone walls that have witnessed the passage of time. Garcilaso de la Vega once lived here, finding within these walls the inspiration for some of his most celebrated eclogues. His verses still remind us today that no gift is greater than true love: <em>&laquo;I was born only to love you; my soul was shaped to fit you&raquo;</em> (Sonnet V).',
+    'story2.p2':'This place also holds a special meaning for us. In her youth, Paquita, Daniel&rsquo;s grandmother, used to cycle from Griñón to the castle to spend her summer days here. That&rsquo;s why it means so much to return here to begin our own story.',
     'story2.maplabel':'&#128205; Castillo de Batres',
     'story2.mapaddr':'Batres, 28909 Madrid &middot; 45 min from the centre',
     'story2.mapbtn':'Open in Google Maps &rarr;',
     'night.tag':'The evening ahead',
     'night.h2':'An evening<br>to remember',
-    'night.p':'Candlelit dinner, illuminated gardens, and music to carry us well into the night. We want an elegant, lively celebration &mdash; the kind that runs long without anyone noticing.',
+    'night.p':'Candlelit dinner, illuminated gardens, and music to carry us well into the night. <strong>We want an elegant, lively celebration</strong> &mdash; the kind that runs long without anyone noticing.',
     'info.tag':'Practical information',
     'info.h2':'Everything<br>you need to know',
     'info.stay.title':'&#127976; Accommodation',
-    'info.stay.p':'If you&rsquo;re coming from out of town, we&rsquo;re happy to recommend nearby places to stay; just let us know when you RSVP.',
+    'info.stay.p':'If you&rsquo;re coming from out of town, we&rsquo;re happy to recommend places to stay; just let us know when you RSVP.',
     'info.bus.title':'&#128652; Transport',
     'info.bus.p':'A bus service will be available: one outbound trip to the castle and two return trips to Madrid (pick-up point and time to be confirmed).',
     'info.gift.title':'&#127873; Gifts',
@@ -879,13 +885,13 @@ const TRANSLATIONS = {
     'info.contact.p':'Daniel: <a href="tel:+34645516876">+34 645 516 876</a><br>Fernando: <a href="tel:+34649485472">+34 649 485 472</a>',
     'dc.label':'What to wear',
     'dc.title':'Dress Code',
-    'dc.intro1':'We&rsquo;d love the occasion to have a classic feel, inspired by the grand evenings of another era &mdash; the kind where every detail called for getting dressed with special care.',
+    'dc.intro1':'We&rsquo;d love the occasion to have a <strong>classic feel</strong>, inspired by the grand evenings of another era &mdash; the kind where every detail called for getting dressed with special care.',
     'dc.intro2':'Any doubts about the dress code? Fernando is happy to help with whatever you need (<a href="tel:+34649485472" style="color:var(--midgreen)">+34 649 485 472</a>).',
     'dc.women.title':'Women',
-    'dc.women.p':'Long evening gown (no midi length).<br>Flowing or structured fabrics, in elegant tones; whites and blacks included.<br>Sequins, embroidery and subtle sparkle are welcome.',
+    'dc.women.p':'<li>Long evening gown (no midi length).</li><li>Flowing or structured fabrics, in elegant tones; whites and blacks included.</li><li>Sequins, embroidery and subtle sparkle are welcome.</li>',
     'dc.men.title':'Men',
-    'dc.men.p':'Classic black tuxedo.<br>Black bow tie.<br>White shirt and black shoes.',
-    'dc.men.note':'If you rent your tuxedo at any <strong>Bon Vivant</strong> store, you get a <strong>&euro;10</strong> discount by mentioning &laquo;Boda Fer y Dani&raquo;.',
+    'dc.men.p':'<li>Classic black tuxedo.</li><li>Black bow tie.</li><li>White shirt and black shoes.</li>',
+    'dc.men.note':'If you rent your tuxedo at any <a href="https://chaquesbonvivant.com/" target="_blank" rel="noopener" style="color:var(--midgreen);border-bottom:1px solid rgba(0,51,32,.3)"><strong>Bon Vivant</strong></a> store, you get a <strong>&euro;10</strong> discount by mentioning &laquo;Boda Fer y Dani&raquo;.',
     'dc.wilde':'As Oscar Wilde once said: <em>&laquo;One should always be a little improbable&raquo;.</em>',
     'pronto.line':'We&rsquo;re still working on the details of the event. We&rsquo;ll keep you posted as soon as we have news!',
     'lb.close':'✕ close',
@@ -964,6 +970,7 @@ function setRsvpForm(lang){
 }
 
 function boot(){
+  window.scrollTo({top:0,left:0,behavior:'auto'});
   const saved = storedLang();
   if(saved && saved!==currentLang){ setLang(saved); }  // recupera el idioma elegido, ya dentro
   else { setRsvpForm(currentLang); }
