@@ -59,13 +59,13 @@ button{font-family:var(--ff-ui);cursor:none}
 .login-box::before{content:'';position:absolute;inset:8px;border:1px solid rgba(196,164,74,.4);pointer-events:none}
 
 .inv-seal{
-  width:44px;height:44px;border-radius:50%;
+  width:66px;height:66px;border-radius:50%;
   border:1px solid rgba(196,164,74,.7);background:rgba(196,164,74,.08);
+  padding:3px;overflow:hidden;
   display:flex;align-items:center;justify-content:center;margin:0 auto 1.1rem;
-  font-family:var(--ff-ser);font-style:italic;font-size:.9rem;color:#9c7f2e;letter-spacing:.02em;
 }
-/* la "y" del sello, algo menor y separada, para que se lea como monograma */
-.inv-seal .seal-y{font-size:.72em;padding:0 .16em}
+/* la foto del perro recortada en circulo dentro del anillo dorado */
+.inv-seal img{width:100%;height:100%;border-radius:50%;object-fit:cover;object-position:50% 45%;display:block}
 .inv-names{
   font-family:var(--ff-ser);font-style:italic;font-weight:300;
   font-size:clamp(1.9rem,6vw,2.5rem);line-height:1.02;color:var(--dkgreen);
@@ -103,7 +103,7 @@ button{font-family:var(--ff-ui);cursor:none}
   #login{padding:1.5rem 1rem}
   .login-box{padding:2.1rem 1.5rem 1.9rem;max-width:360px}
   .login-box::before{inset:6px}
-  .inv-seal{width:40px;height:40px;font-size:.82rem;margin-bottom:.9rem}
+  .inv-seal{width:58px;height:58px;margin-bottom:.9rem}
 }
 
 /* ── SAVE THE DATE + NAV (barra fija superior unificada) ── */
@@ -339,7 +339,6 @@ button{font-family:var(--ff-ui);cursor:none}
 .dc-col p{font-family:var(--ff-eb);font-size:1rem;line-height:1.95;color:var(--td)}
 .dc-note{font-family:var(--ff-eb);font-style:italic;font-size:.92rem;color:var(--tm);margin-top:1rem;padding:1rem;background:rgba(0,51,32,.06);border-left:2px solid var(--gold)}
 .dc-wilde{font-family:var(--ff-eb);font-style:italic;font-size:1.15rem;color:var(--tm);text-align:center;margin:1.5rem auto 0;max-width:600px;line-height:1.8}
-.section-note{font-family:var(--ff-eb);font-style:italic;font-size:1.15rem;color:var(--tm);text-align:center;max-width:600px;margin:2.4rem auto 0;line-height:1.85}
 .swatches{display:grid;grid-template-columns:repeat(6,1fr);gap:.6rem;max-width:760px;margin:0 auto}
 .sw{aspect-ratio:2/3;border-radius:1px;display:flex;align-items:flex-end;padding:.6rem;overflow:hidden;transition:transform .4s cubic-bezier(.16,1,.3,1)}
 .sw:hover{transform:scale(1.04)}
@@ -533,7 +532,7 @@ footer p{font-family:var(--ff-ui);font-size:.68rem;color:var(--sage);letter-spac
   <div class="login-bg-overlay"></div>
 
   <div class="login-box">
-    <div class="inv-seal">F<span class="seal-y">y</span>D</div>
+    <div class="inv-seal"><img src="https://raw.githubusercontent.com/gserranodaniel-ctrl/Boda-Fernando-y-Daniel/main/Perro00.png" alt="Fernando y Daniel"></div>
     <div class="inv-names">Fernando <span class="amp">y</span> Daniel</div>
     <p class="inv-lede" data-i18n="login.lede">tienen el honor de invitarle<br>a la celebración de su enlace</p>
     <p class="inv-date" data-i18n="login.date">28 de mayo de 2027</p>
@@ -703,12 +702,8 @@ footer p{font-family:var(--ff-ui);font-size:.68rem;color:var(--sage);letter-spac
         <img src="Ellas3.jpeg" alt="Look" onclick="openLb(this.src)">
         <img src="Ellas4.jpeg" alt="Look" onclick="openLb(this.src)">
         <img src="Ellas5.jpeg" alt="Look" onclick="openLb(this.src)">
-        <img src="Ellas6.jpeg" alt="Look" onclick="openLb(this.src)">
-        <img src="Ellas7.jpeg" alt="Look" onclick="openLb(this.src)">
-        <img src="Ellas8.jpeg" alt="Look" onclick="openLb(this.src)">
       </div>
     </div>
-    <p class="section-note fi" data-i18n="dc.pending">A&uacute;n queda tiempo por delante: estamos ultimando los &uacute;ltimos detalles y os mantendremos informados en cuanto haya novedades.</p>
   </div>
 </section>
 
@@ -830,7 +825,6 @@ const TRANSLATIONS = {
     'dc.men.p':'Esmoquin negro clásico.<br>Pajarita negra.<br>Camisa blanca y zapatos negros.',
     'dc.men.note':'Si alquiláis el esmoquin en cualquier tienda <strong>Bon Vivant</strong>, tenéis un descuento de <strong>10€</strong> indicando «Boda Fer y Dani».',
     'dc.wilde':'Como recordaba Oscar Wilde: <em>«Uno debería estar siempre un poco demasiado bien vestido».</em>',
-    'dc.pending':'Aún queda tiempo por delante: estamos ultimando los últimos detalles y os mantendremos informados en cuanto haya novedades.',
     'lb.close':'✕ cerrar',
     'rsvp.label':'¿Nos acompañas?',
     'rsvp.h2':'Confirma tu <em>asistencia</em>',
@@ -883,7 +877,6 @@ const TRANSLATIONS = {
     'dc.men.p':'Classic black tuxedo.<br>Black bow tie.<br>White shirt and black shoes.',
     'dc.men.note':'If you rent your tuxedo at any <strong>Bon Vivant</strong> store, you get a <strong>&euro;10</strong> discount by mentioning &laquo;Boda Fer y Dani&raquo;.',
     'dc.wilde':'As Oscar Wilde once said: <em>&laquo;One should always be a little improbable&raquo;.</em>',
-    'dc.pending':'There&rsquo;s still plenty of time ahead — we&rsquo;re finalising the last details and will keep you posted as soon as we have more news.',
     'lb.close':'✕ close',
     'rsvp.label':'Will you join us?',
     'rsvp.h2':'Confirm your <em>attendance</em>',
@@ -939,7 +932,7 @@ function initLang(){
 
 function boot(){
   initHeroVideo();
-  initPhotoBanner('dc-track',70);
+  initPhotoBanner('dc-track',45);
   initCursor();
   initNav();
   heroAnim();
@@ -961,54 +954,78 @@ function initHeroVideo(){
   v.addEventListener('pause',()=>{if(!document.hidden)play();});
 }
 
-/* ── BANNERS DE FOTOS ── */
-/* El bucle desplaza la tira como maximo el ancho de UNA secuencia. Para que no
-   quede hueco a la derecha hacen falta copias suficientes para cubrir la
-   pantalla mas ese desplazamiento: (copias-1) * secuencia >= ancho ventana.
-   Se anade una copia extra de margen. Las copias se calculan en ejecucion,
-   nunca fijas en el HTML: dependen del ancho de pantalla y del alto de la tira. */
-function initPhotoBanner(id,duration){
+/* ── BANNER DE FOTOS (marquesina continua) ── */
+/* Bucle de requestAnimationFrame que desplaza la tira a velocidad constante
+   (pixeles/segundo) y NO se detiene nunca. Ventajas frente al enfoque previo:
+   - No depende de GSAP ni de un contador de imagenes cargadas (que podia
+     quedarse bloqueado por una condicion de carrera y dejar el banner quieto).
+   - El bucle arranca de inmediato; en cuanto las fotos tienen dimensiones se
+     mide UNA secuencia y se clona lo justo para cubrir la pantalla.
+   - El reinicio del desplazamiento (sumar el ancho de una secuencia) es
+     imperceptible porque todas las copias son identicas. */
+function initPhotoBanner(id,pxPerSec){
   const el=document.getElementById(id);
-  if(!el||typeof gsap==='undefined')return;
+  if(!el)return;
   const base=Array.prototype.slice.call(el.children);
   if(!base.length)return;
 
-  let seq=0,copies=1,tween=null;
+  const speed=pxPerSec||45;   // pixeles por segundo
+  let seq=0,x=0,last=0;
 
+  // ancho real de UNA secuencia original (incluye margenes laterales)
+  function measure(){
+    let w=0;
+    base.forEach(n=>{
+      const s=getComputedStyle(n);
+      w+=n.getBoundingClientRect().width+
+         parseFloat(s.marginLeft||0)+parseFloat(s.marginRight||0);
+    });
+    return w;
+  }
+
+  // clona secuencias completas hasta cubrir pantalla + una secuencia extra
   function ensureCopies(){
     if(!seq)return;
-    const need=Math.max(3,Math.ceil(window.innerWidth/seq)+2);
-    while(copies<need){
+    const need=Math.max(2,Math.ceil((window.innerWidth+seq)/seq)+1);
+    let have=el.children.length/base.length;
+    while(have<need){
       base.forEach(n=>el.appendChild(n.cloneNode(true)));
-      copies++;
+      have++;
     }
   }
 
-  function start(){
-    seq=el.scrollWidth;              // ancho de una secuencia, antes de clonar
-    if(!seq)return;
-    ensureCopies();
-    if(tween)tween.kill();
-    tween=gsap.to(el,{x:-seq,duration:duration||40,ease:'none',repeat:-1,
-      modifiers:{x:gsap.utils.unitize(x=>parseFloat(x)%seq)}});
+  function setup(){
+    seq=measure();
+    if(seq)ensureCopies();
   }
 
-  // Solo cuando las imagenes tengan dimensiones reales; si no, la medida falla
-  const imgs=base.filter(n=>n.tagName==='IMG');
-  let pending=imgs.filter(im=>!im.complete||!im.naturalWidth).length;
-  if(pending===0){start();}
-  else{
-    imgs.forEach(im=>{
-      if(im.complete&&im.naturalWidth)return;
-      const done=()=>{if(--pending===0)start();};
-      im.addEventListener('load',done,{once:true});
-      im.addEventListener('error',done,{once:true});
-    });
+  function frame(t){
+    if(!last)last=t;
+    const dt=(t-last)/1000; last=t;
+    if(seq){
+      x-=speed*dt;
+      if(x<=-seq)x+=seq;             // reinicio imperceptible
+      el.style.transform='translateX('+x+'px)';
+    }
+    requestAnimationFrame(frame);
   }
+
+  requestAnimationFrame(frame);       // el bucle corre ya; se movera al tener medida
+
+  setup();
+  if(!seq){                           // fotos aun sin dimensiones: reintentar
+    const retry=setInterval(()=>{setup();if(seq)clearInterval(retry);},120);
+    setTimeout(()=>clearInterval(retry),6000);
+  }
+  // remedir cuando cada foto termine de cargar (sus dimensiones pueden cambiar)
+  base.filter(n=>n.tagName==='IMG').forEach(im=>{
+    im.addEventListener('load',setup,{once:true});
+    im.addEventListener('error',setup,{once:true});
+  });
 
   let rt;
   window.addEventListener('resize',()=>{
-    clearTimeout(rt);rt=setTimeout(ensureCopies,200);
+    clearTimeout(rt);rt=setTimeout(()=>{seq=measure();ensureCopies();},200);
   },{passive:true});
 }
 
