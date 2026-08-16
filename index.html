@@ -19,6 +19,10 @@
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;font-size:17px;overflow-x:hidden;overflow-x:clip;max-width:100%}
 body{font-family:var(--ff-eb);background:var(--off);color:var(--td);overflow-x:hidden;overflow-x:clip;width:100%;max-width:100%;position:relative;cursor:none}
+/* Contenedor de todo el contenido: recorta cualquier desborde lateral en movil
+   (clip, a diferencia de hidden, no rompe el position:sticky de escritorio). */
+#page{width:100%;max-width:100%}
+@media(max-width:860px){#page{overflow-x:clip}}
 img{display:block;max-width:100%}
 a{color:inherit;text-decoration:none}
 button{font-family:var(--ff-ui);cursor:none}
@@ -196,7 +200,7 @@ button{font-family:var(--ff-ui);cursor:none}
 
 /* ── HERO ── */
 #hero{
-  min-height:100vh;background:var(--black);
+  min-height:100vh;min-height:100svh;background:var(--black);
   display:flex;flex-direction:column;
   justify-content:flex-end;          /* content anchored bottom */
   padding:0 3rem 5rem;
@@ -579,6 +583,7 @@ footer p{font-family:var(--ff-ui);font-size:.68rem;color:var(--sage);letter-spac
 </div>
 
 
+<div id="page">
 <!-- ── HERO ── -->
 <section id="hero">
   <!-- Vídeo de fondo: Puedes_hacerlos_bailar_pero_si.mp4 — debe estar en la MISMA carpeta que este HTML. -->
@@ -757,6 +762,7 @@ footer p{font-family:var(--ff-ui);font-size:.68rem;color:var(--sage);letter-spac
     </script>
   </div>
 </section>
+</div><!-- /#page -->
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
@@ -972,8 +978,17 @@ function setRsvpForm(lang){
   if(window.jotformEmbedHandler){attach();}else{setTimeout(attach,600);}
 }
 
+/* Salto instantaneo al inicio (sin animacion). Desactiva el scroll-behavior
+   smooth un instante para que no se vea "subir" tras meter la contrasena. */
+function goTop(){
+  const h=document.documentElement, prev=h.style.scrollBehavior;
+  h.style.scrollBehavior='auto';
+  window.scrollTo(0,0);
+  requestAnimationFrame(()=>{ window.scrollTo(0,0); h.style.scrollBehavior=prev; });
+}
+
 function boot(){
-  window.scrollTo({top:0,left:0,behavior:'auto'});
+  goTop();
   const saved = storedLang();
   if(saved && saved!==currentLang){ setLang(saved); }  // recupera el idioma elegido, ya dentro
   else { setRsvpForm(currentLang); }
