@@ -59,13 +59,10 @@ button{font-family:var(--ff-ui);cursor:none}
 .login-box::before{content:'';position:absolute;inset:8px;border:1px solid rgba(196,164,74,.4);pointer-events:none}
 
 .inv-seal{
-  width:66px;height:66px;border-radius:50%;
-  border:1px solid rgba(196,164,74,.7);background:rgba(196,164,74,.08);
-  padding:3px;overflow:hidden;
   display:flex;align-items:center;justify-content:center;margin:0 auto 1.1rem;
 }
-/* la foto del perro recortada en circulo dentro del anillo dorado */
-.inv-seal img{width:100%;height:100%;border-radius:50%;object-fit:cover;object-position:50% 45%;display:block}
+/* la foto del perro, sin marco ni recorte circular: se muestra entera */
+.inv-seal img{width:auto;max-width:130px;max-height:88px;object-fit:contain;display:block}
 .inv-names{
   font-family:var(--ff-ser);font-style:italic;font-weight:300;
   font-size:clamp(1.9rem,6vw,2.5rem);line-height:1.02;color:var(--dkgreen);
@@ -103,7 +100,8 @@ button{font-family:var(--ff-ui);cursor:none}
   #login{padding:1.5rem 1rem}
   .login-box{padding:2.1rem 1.5rem 1.9rem;max-width:360px}
   .login-box::before{inset:6px}
-  .inv-seal{width:58px;height:58px;margin-bottom:.9rem}
+  .inv-seal{margin-bottom:.9rem}
+  .inv-seal img{max-width:110px;max-height:76px}
 }
 
 /* ── SAVE THE DATE + NAV (barra fija superior unificada) ── */
@@ -693,15 +691,18 @@ footer p{font-family:var(--ff-ui);font-size:.68rem;color:var(--sage);letter-spac
     <div class="photo-banner">
       <div class="pb-track" id="dc-track">
         <img src="Ambos0.jpeg" alt="Look" onclick="openLb(this.src)">
-        <img src="Ambos1.jpeg" alt="Look" onclick="openLb(this.src)">
-        <img src="Hombres0.jpeg" alt="Look" onclick="openLb(this.src)">
         <img src="Ellas1.jpeg" alt="Look" onclick="openLb(this.src)">
-        <img src="Ambos2.jpeg" alt="Look" onclick="openLb(this.src)">
         <img src="Ellas2.jpeg" alt="Look" onclick="openLb(this.src)">
-        <img src="Hombres1.jpeg" alt="Look" onclick="openLb(this.src)">
+        <img src="Hombres0.jpeg" alt="Look" onclick="openLb(this.src)">
         <img src="Ellas3.jpeg" alt="Look" onclick="openLb(this.src)">
         <img src="Ellas4.jpeg" alt="Look" onclick="openLb(this.src)">
+        <img src="Ambos1.jpeg" alt="Look" onclick="openLb(this.src)">
         <img src="Ellas5.jpeg" alt="Look" onclick="openLb(this.src)">
+        <img src="Ellas6.jpeg" alt="Look" onclick="openLb(this.src)">
+        <img src="Hombres1.jpeg" alt="Look" onclick="openLb(this.src)">
+        <img src="Ellas7.jpeg" alt="Look" onclick="openLb(this.src)">
+        <img src="Ambos2.jpeg" alt="Look" onclick="openLb(this.src)">
+        <img src="Ellas8.jpeg" alt="Look" onclick="openLb(this.src)">
       </div>
     </div>
   </div>
@@ -932,7 +933,7 @@ function initLang(){
 
 function boot(){
   initHeroVideo();
-  initPhotoBanner('dc-track',45);
+  initPhotoBanner('dc-track',62);
   initCursor();
   initNav();
   heroAnim();
