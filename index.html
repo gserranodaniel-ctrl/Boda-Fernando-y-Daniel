@@ -165,7 +165,7 @@ button{font-family:var(--ff-ui);cursor:none}
   transition:border-color .3s,color .3s;
 }
 .lang-btn:hover,.lang-btn:focus-visible{border-color:var(--gold);color:var(--gold)}
-.lang-btn .lang-caret{font-size:.7rem;transition:transform .25s;color:var(--gold)}
+.lang-btn .lang-caret{display:inline-block;width:0;height:0;border-left:4px solid transparent;border-right:4px solid transparent;border-top:5px solid var(--gold);transition:transform .25s}
 .lang-switch.open .lang-btn .lang-caret{transform:rotate(180deg)}
 .lang-menu{
   position:absolute;top:calc(100% + .6rem);right:0;min-width:130px;
@@ -560,7 +560,7 @@ footer p{font-family:var(--ff-ui);font-size:.68rem;color:var(--sage);letter-spac
     <li data-section="rsvp"><a href="#rsvp" onclick="closeNav()" data-i18n="nav.rsvp">Confirmar</a></li>
     <li class="lang-switch" id="lang-switch">
       <button class="lang-btn" id="lang-btn" onclick="toggleLangMenu(event)" aria-haspopup="true" aria-expanded="false">
-        <span id="lang-btn-label">ES</span><span class="lang-caret">▾</span>
+        <span id="lang-btn-label">ES</span><span class="lang-caret" aria-hidden="true"></span>
       </button>
       <div class="lang-menu" id="lang-menu">
         <button type="button" onclick="setLang('es')" data-lang-option="es">Español</button>
@@ -925,6 +925,11 @@ function setLang(lang){
   if(sw) sw.classList.remove('open');
 }
 
+// idioma recordado (o null); solo se aplica DENTRO, no en la pantalla de contrasena
+function storedLang(){
+  try{ const v=localStorage.getItem('boda_lang'); return (v==='es'||v==='en')?v:null; }catch(e){ return null; }
+}
+
 function toggleLangMenu(e){
   if(e) e.stopPropagation();
   document.getElementById('lang-switch').classList.toggle('open');
@@ -936,10 +941,9 @@ document.addEventListener('click', e=>{
 });
 
 function initLang(){
-  let saved = 'es';
-  try{ saved = localStorage.getItem('boda_lang') || 'es'; }catch(e){}
-  currentLang = saved;
-  applyTranslations(saved);
+  // Por defecto siempre espanol; el idioma se cambia a mano dentro de la web.
+  currentLang = 'es';
+  applyTranslations('es');
 }
 
 /* ── RSVP: formulario segun idioma ── */
@@ -960,7 +964,9 @@ function setRsvpForm(lang){
 }
 
 function boot(){
-  setRsvpForm(currentLang);
+  const saved = storedLang();
+  if(saved && saved!==currentLang){ setLang(saved); }  // recupera el idioma elegido, ya dentro
+  else { setRsvpForm(currentLang); }
   initHeroVideo();
   initPhotoBanner('dc-track',62);
   initCursor();
