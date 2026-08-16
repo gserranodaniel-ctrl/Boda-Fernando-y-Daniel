@@ -552,7 +552,7 @@ footer p{font-family:var(--ff-ui);font-size:.68rem;color:var(--sage);letter-spac
   <span class="std-text" data-i18n="std.bar">Save the Date — 28 de mayo de 2027</span>
   <button class="hamburger" onclick="toggleNav()"><span></span><span></span><span></span></button>
   <ul class="nav-ul" id="nav-ul">
-    <li data-section="narrative"><a href="#narrative" onclick="closeNav()" data-i18n="nav.story">Historia</a></li>
+    <li data-section="narrative"><a href="#narrative" onclick="closeNav()" data-i18n="nav.story">Evento</a></li>
     <li data-section="dresscode"><a href="#dresscode" onclick="closeNav()" data-i18n="nav.dresscode">Dress code</a></li>
     <li data-section="rsvp"><a href="#rsvp" onclick="closeNav()" data-i18n="nav.rsvp">Confirmar</a></li>
     <li class="lang-switch" id="lang-switch">
@@ -600,35 +600,19 @@ footer p{font-family:var(--ff-ui);font-size:.68rem;color:var(--sage);letter-spac
 <section id="narrative">
 <div class="narrative-inner">
 
-  <!-- Bloque 1: Nuestra historia (unificado) -->
+  <!-- Bloque: Nuestra historia + El evento (unificado, una sola imagen) -->
   <div class="story-block">
-    <div class="story-sticky">
-      <div class="img-box">
-        <img src="FernandoyDani.jpeg" alt="Daniel y Fernando" onclick="openLb(this.src)">
-      </div>
-    </div>
-    <div class="story-scroll-col">
-      <div class="stu" data-reveal>
-        <span class="s-tag-gold" data-i18n="story1.tag">Nuestra historia</span>
-        <h2 class="s-headline s-headline--sm" data-i18n="story1.h2">Todo empez&oacute;<br>con una espera.</h2>
-        <p class="s-body" data-i18n="story1.p1">Fernando lleg&oacute; tarde a la primera cita. Lo que podr&iacute;a haber sido el peor comienzo fue, en realidad, el principio de la mejor historia que pod&iacute;amos imaginar. Esa espera, que se hizo eterna y no dur&oacute; nada, fue el primer minuto de todo lo que vino despu&eacute;s.</p>
-        <p class="s-body" style="margin-top:1.1rem" data-i18n="story1.p2">Un a&ntilde;o y poco m&aacute;s tarde, el tiempo juntos se ha convertido en viajes, en risas a destiempo, en madrugadas largas, en proyectos compartidos y en la certeza silenciosa de que el otro siempre estar&aacute; ah&iacute;. Por eso, en la &uacute;ltima escapada a Barcelona sucedi&oacute; la pedida, &iquest;para qu&eacute; esperar m&aacute;s cuando los dos lo tenemos claro?</p>
-      </div>
-    </div>
-  </div>
-
-  <!-- Bloque 2: El lugar -->
-  <div class="story-block flip">
     <div class="story-sticky">
       <div class="img-box">
         <img src="castillo_web.jpeg" alt="Castillo de Batres" onclick="openLb(this.src)">
       </div>
     </div>
-    <div class="story-scroll-col r">
+    <div class="story-scroll-col">
       <div class="stu" data-reveal>
-        <span class="s-tag-gold" data-i18n="story2.tag">El lugar</span>
-        <h2 class="s-headline s-headline--sm" data-i18n="story2.h2">El Castillo<br>de Batres.</h2>
-        <p class="s-body" data-i18n="story2.p1">A cuarenta y cinco minutos de Madrid se encuentra este castillo del siglo XV, rodeado de jardines y muros de piedra que han sido testigos del paso del tiempo. Aqu&iacute; vivi&oacute; Garcilaso de la Vega, quien hall&oacute; entre estos muros la inspiraci&oacute;n para algunas de sus &eacute;glogas m&aacute;s c&eacute;lebres. Sus versos nos recuerdan, a&uacute;n hoy, que no hay entrega mayor que la del amor verdadero: <em>&laquo;Yo no nac&iacute; sino para quereros; mi alma os ha cortado a su medida&raquo;</em> (Soneto V).</p>
+        <span class="s-tag-gold" data-i18n="story2.tag">El Evento</span>
+        <h2 class="s-headline s-headline--sm" data-i18n="story2.h2">Nos Casamos</h2>
+        <p class="s-body" data-i18n="story2.p0">Fernando lleg&oacute; tarde a la primera cita, y esa espera se convirti&oacute; en el comienzo de la mejor historia que pod&iacute;amos imaginar. Desde entonces, viajes, risas y la certeza de que el otro siempre estar&aacute; ah&iacute; nos han tra&iacute;do hasta aqu&iacute;: en nuestra &uacute;ltima escapada a Barcelona lleg&oacute; el momento de decir que s&iacute;.</p>
+        <p class="s-body" style="margin-top:1rem" data-i18n="story2.p1">Y para celebrar ese s&iacute; queremos un lugar a la altura del momento. A cuarenta y cinco minutos de Madrid se encuentra este castillo del siglo XV, rodeado de jardines y muros de piedra que han sido testigos del paso del tiempo. Aqu&iacute; vivi&oacute; Garcilaso de la Vega, quien hall&oacute; entre estos muros la inspiraci&oacute;n para algunas de sus &eacute;glogas m&aacute;s c&eacute;lebres. Sus versos nos recuerdan, a&uacute;n hoy, que no hay entrega mayor que la del amor verdadero: <em>&laquo;Yo no nac&iacute; sino para quereros; mi alma os ha cortado a su medida&raquo;</em> (Soneto V).</p>
         <p class="s-body" style="margin-top:1rem" data-i18n="story2.p2">Este lugar tiene para nosotros un significado especial. En su juventud, Paquita, la abuela de Daniel, sol&iacute;a recorrer en bicicleta el camino desde Gri&ntilde;&oacute;n hasta el castillo para pasar aqu&iacute; los d&iacute;as de verano. Nos hace especial ilusi&oacute;n volver a este mismo lugar para comenzar nuestra propia historia, uniendo pasado y presente en un escenario que se abrir&aacute; ante nosotros como el lugar donde empezar a escribir nuestro futuro.</p>
         <div class="info-inline">
           <div class="map-card">
@@ -646,7 +630,7 @@ footer p{font-family:var(--ff-ui);font-size:.68rem;color:var(--sage);letter-spac
   <!-- Bloque 3a: intro (va ANTES de las fotos) -->
   <div class="story-intro stu" data-reveal>
     <span class="s-tag-gold" data-i18n="night.tag">As&iacute; ser&aacute; la noche</span>
-    <h2 class="s-headline s-headline--sm" data-i18n="night.h2">Una velada<br>para recordar.</h2>
+    <h2 class="s-headline s-headline--sm" data-i18n="night.h2">Una velada<br>para recordar</h2>
     <p class="s-body" data-i18n="night.p">Cena a la luz de las velas, jardines iluminados y m&uacute;sica que nos acompa&ntilde;ar&aacute; hasta bien entrada la noche. Queremos una celebraci&oacute;n elegante y viva, de esas que se alargan sin darse cuenta.</p>
     <div class="quad-grid">
       <img src="Fiesta0.jpeg" alt="" onclick="openLb(this.src)">
@@ -796,7 +780,7 @@ function doLogin(){
 /* ── IDIOMA / TRANSLATIONS ── */
 const TRANSLATIONS = {
   es: {
-    'nav.story':'Historia',
+    'nav.story':'Evento',
     'nav.dresscode':'Dress code',
     'nav.rsvp':'Confirmar',
     'std.bar':'Save the Date — 28 de mayo de 2027',
@@ -810,19 +794,16 @@ const TRANSLATIONS = {
     'hero.line1':'Daniel <span class="amp">y</span>',
     'cd.days':'Días','cd.hours':'Horas','cd.mins':'Minutos','cd.secs':'Segundos',
     'cd.today':'¡Hoy es el día!',
-    'story1.tag':'Nuestra historia',
-    'story1.h2':'Todo empez&oacute;<br>con una espera.',
-    'story1.p1':'Fernando lleg&oacute; tarde a la primera cita. Lo que podr&iacute;a haber sido el peor comienzo fue, en realidad, el principio de la mejor historia que pod&iacute;amos imaginar. Esa espera, que se hizo eterna y no dur&oacute; nada, fue el primer minuto de todo lo que vino despu&eacute;s.',
-    'story1.p2':'Un a&ntilde;o y poco m&aacute;s tarde, el tiempo juntos se ha convertido en viajes, en risas a destiempo, en madrugadas largas, en proyectos compartidos y en la certeza silenciosa de que el otro siempre estar&aacute; ah&iacute;. Por eso, en la &uacute;ltima escapada a Barcelona sucedi&oacute; la pedida, &iquest;para qu&eacute; esperar m&aacute;s cuando los dos lo tenemos claro?',
-    'story2.tag':'El lugar',
-    'story2.h2':'El Castillo<br>de Batres.',
-    'story2.p1':'A cuarenta y cinco minutos de Madrid se encuentra este castillo del siglo XV, rodeado de jardines y muros de piedra que han sido testigos del paso del tiempo. Aqu&iacute; vivi&oacute; Garcilaso de la Vega, quien hall&oacute; entre estos muros la inspiraci&oacute;n para algunas de sus &eacute;glogas m&aacute;s c&eacute;lebres. Sus versos nos recuerdan, a&uacute;n hoy, que no hay entrega mayor que la del amor verdadero: <em>&laquo;Yo no nac&iacute; sino para quereros; mi alma os ha cortado a su medida&raquo;</em> (Soneto V).',
+    'story2.tag':'El Evento',
+    'story2.h2':'Nos Casamos',
+    'story2.p0':'Fernando lleg&oacute; tarde a la primera cita, y esa espera se convirti&oacute; en el comienzo de la mejor historia que pod&iacute;amos imaginar. Desde entonces, viajes, risas y la certeza de que el otro siempre estar&aacute; ah&iacute; nos han tra&iacute;do hasta aqu&iacute;: en nuestra &uacute;ltima escapada a Barcelona lleg&oacute; el momento de decir que s&iacute;.',
+    'story2.p1':'Y para celebrar ese s&iacute; queremos un lugar a la altura del momento. A cuarenta y cinco minutos de Madrid se encuentra este castillo del siglo XV, rodeado de jardines y muros de piedra que han sido testigos del paso del tiempo. Aqu&iacute; vivi&oacute; Garcilaso de la Vega, quien hall&oacute; entre estos muros la inspiraci&oacute;n para algunas de sus &eacute;glogas m&aacute;s c&eacute;lebres. Sus versos nos recuerdan, a&uacute;n hoy, que no hay entrega mayor que la del amor verdadero: <em>&laquo;Yo no nac&iacute; sino para quereros; mi alma os ha cortado a su medida&raquo;</em> (Soneto V).',
     'story2.p2':'Este lugar tiene para nosotros un significado especial. En su juventud, Paquita, la abuela de Daniel, sol&iacute;a recorrer en bicicleta el camino desde Gri&ntilde;&oacute;n hasta el castillo para pasar aqu&iacute; los d&iacute;as de verano. Nos hace especial ilusi&oacute;n volver a este mismo lugar para comenzar nuestra propia historia, uniendo pasado y presente en un escenario que se abrir&aacute; ante nosotros como el lugar donde empezar a escribir nuestro futuro.',
     'story2.maplabel':'&#128205; Castillo de Batres',
     'story2.mapaddr':'Batres, 28909 Madrid &middot; 45 min del centro',
     'story2.mapbtn':'Abrir en Google Maps &rarr;',
     'night.tag':'As&iacute; ser&aacute; la noche',
-    'night.h2':'Una velada<br>para recordar.',
+    'night.h2':'Una velada<br>para recordar',
     'night.p':'Cena a la luz de las velas, jardines iluminados y m&uacute;sica que nos acompa&ntilde;ar&aacute; hasta bien entrada la noche. Queremos una celebraci&oacute;n elegante y viva, de esas que se alargan sin darse cuenta.',
     'info.tag':'Informaci&oacute;n pr&aacute;ctica',
     'info.h2':'Todo lo que<br>necesitas saber',
@@ -851,7 +832,7 @@ const TRANSLATIONS = {
     'rsvp.fallback':'&iquest;No se carga el formulario?<br><a href="https://form.jotform.com/261023433093043" target="_blank" rel="noopener">Abrirlo en una pesta&ntilde;a nueva &rarr;</a>'
   },
   en: {
-    'nav.story':'Our Story',
+    'nav.story':'Event',
     'nav.dresscode':'Dress code',
     'nav.rsvp':'RSVP',
     'std.bar':'Save the Date — May 28, 2027',
@@ -865,19 +846,16 @@ const TRANSLATIONS = {
     'hero.line1':'Daniel <span class="amp">&amp;</span>',
     'cd.days':'Days','cd.hours':'Hours','cd.mins':'Minutes','cd.secs':'Seconds',
     'cd.today':'Today is the day!',
-    'story1.tag':'Our story',
-    'story1.h2':'It all began<br>with a wait.',
-    'story1.p1':'Fernando was late to their first date. What could have been the worst possible start turned out, in fact, to be the beginning of the best story we could have imagined. That wait, which felt endless yet lasted no time at all, was the first minute of everything that followed.',
-    'story1.p2':'A little over a year later, our time together has become trips, out-of-sync laughter, long nights, shared projects, and the quiet certainty that the other will always be there. That&rsquo;s why, on our last getaway to Barcelona, the proposal happened &mdash; why wait any longer when we&rsquo;re both so sure?',
-    'story2.tag':'The venue',
-    'story2.h2':'Castillo<br>de Batres.',
-    'story2.p1':'Forty-five minutes from Madrid stands this 15th-century castle, surrounded by gardens and stone walls that have witnessed the passage of time. Garcilaso de la Vega once lived here, finding within these walls the inspiration for some of his most celebrated eclogues. His verses still remind us today that no gift is greater than true love: <em>&laquo;I was born only to love you; my soul was shaped to fit you&raquo;</em> (Sonnet V).',
+    'story2.tag':'The Event',
+    'story2.h2':'We&rsquo;re Getting Married',
+    'story2.p0':'Fernando was late to their first date, and that wait became the start of the best story we could have imagined. Since then, trips, laughter, and the certainty that the other will always be there have brought us here &mdash; and on our last getaway to Barcelona, the moment finally came to say yes.',
+    'story2.p1':'And to celebrate that yes, we wanted a place worthy of the moment. Forty-five minutes from Madrid stands this 15th-century castle, surrounded by gardens and stone walls that have witnessed the passage of time. Garcilaso de la Vega once lived here, finding within these walls the inspiration for some of his most celebrated eclogues. His verses still remind us today that no gift is greater than true love: <em>&laquo;I was born only to love you; my soul was shaped to fit you&raquo;</em> (Sonnet V).',
     'story2.p2':'This place holds a special meaning for us. In her youth, Paquita, Daniel&rsquo;s grandmother, used to cycle from Griñón to the castle to spend her summer days here. It fills us with joy to return to this very place to begin our own story, joining past and present in a setting that will unfold before us as the place where we start writing our future.',
     'story2.maplabel':'&#128205; Castillo de Batres',
     'story2.mapaddr':'Batres, 28909 Madrid &middot; 45 min from the centre',
     'story2.mapbtn':'Open in Google Maps &rarr;',
     'night.tag':'The evening ahead',
-    'night.h2':'An evening<br>to remember.',
+    'night.h2':'An evening<br>to remember',
     'night.p':'Candlelit dinner, illuminated gardens, and music to carry us well into the night. We want an elegant, lively celebration &mdash; the kind that runs long without anyone noticing.',
     'info.tag':'Practical information',
     'info.h2':'Everything<br>you need to know',
@@ -1045,23 +1023,24 @@ function closeNav(){document.getElementById('nav-ul').classList.remove('open');}
 
 /* ── ACTIVE SECTION INDICATOR ── */
 function initActiveSections(){
-  const sections=['hero','narrative','dresscode','rsvp'];
+  const ids=['narrative','dresscode','rsvp'];
   const navItems=document.querySelectorAll('.nav-ul li[data-section]');
+  if(!navItems.length)return;
 
+  const setActive=(id)=>{
+    navItems.forEach(li=>li.classList.toggle('active',li.dataset.section===id));
+  };
+
+  const stdH=parseInt(getComputedStyle(document.documentElement).getPropertyValue('--std-h'))||56;
   const obs=new IntersectionObserver(entries=>{
     entries.forEach(e=>{
-      if(e.isIntersecting){
-        const id=e.target.id;
-        navItems.forEach(li=>{
-          li.classList.toggle('active',li.dataset.section===id);
-        });
-      }
+      if(e.isIntersecting) setActive(e.target.id);
     });
-  },{threshold:.2,rootMargin:'-10% 0px -10% 0px'});
+  },{rootMargin:`-${stdH+4}px 0px -60% 0px`,threshold:0});
 
-  sections.forEach(id=>{
+  ids.forEach(id=>{
     const el=document.getElementById(id);
-    if(el)obs.observe(el);
+    if(el) obs.observe(el);
   });
 }
 
