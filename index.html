@@ -6,15 +6,15 @@
 <title>Daniel & Fernando · 28 Mayo 2027</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Montserrat:wght@200;300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&display=swap" rel="stylesheet">
 <style>
 :root{
   --black:#080808;--dkgreen:#001A10;--midgreen:#003320;--ltgreen:#00472C;
   --sage:#6B9E82;--cream:#F7F2E8;--off:#FAFAF7;--warm:#F0EBE1;
   --gold:#C4A44A;--white:#FFFFFF;--td:#0A120A;--tm:#1E2E1E;
-  --ff-ser:'Cormorant Garamond','EB Garamond',Georgia,serif;
-  --ff-eb:'EB Garamond',Georgia,serif;
-  --ff-ui:'Montserrat',sans-serif;
+  --ff-ser:'Cormorant Garamond',Georgia,serif;
+  --ff-eb:'Cormorant Garamond',Georgia,serif;
+  --ff-ui:'Cormorant Garamond',Georgia,serif;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;font-size:17px}
@@ -368,13 +368,10 @@ button{font-family:var(--ff-ui);cursor:none}
 #lb-x{position:absolute;top:1.8rem;right:2rem;color:var(--gold);cursor:pointer;opacity:.7;font-family:var(--ff-ui);font-size:.75rem;letter-spacing:.2em;text-transform:uppercase}
 #lb-x:hover{opacity:1}
 
-/* ── AVISO / PRÓXIMAMENTE (franja entre carrusel y formulario) ── */
-#pronto{background:var(--dkgreen);padding:5.5rem 2rem;text-align:center;position:relative;overflow:hidden}
-#pronto::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(196,164,74,.12) 0%,transparent 62%);pointer-events:none}
-.pronto-inner{max-width:680px;margin:0 auto;position:relative;z-index:1}
-.pronto-lead{font-family:var(--ff-ser);font-style:italic;font-weight:300;font-size:clamp(2rem,5vw,3.4rem);line-height:1.06;color:var(--cream);margin-top:.5rem}
-.pronto-sub{font-family:var(--ff-eb);font-size:1.02rem;line-height:1.9;color:var(--sage);max-width:520px;margin:0 auto}
-@media(max-width:640px){#pronto{padding:4.5rem 1.4rem}}
+/* ── AVISO bajo el carrusel (párrafo simple en negro) ── */
+.pronto-line{font-family:var(--ff-ser);font-style:italic;font-weight:400;font-size:clamp(1.2rem,2.6vw,1.7rem);line-height:1.7;color:var(--td);text-align:center;max-width:620px;margin:3.5rem auto 1rem;animation:prontoIn .9s ease-out both}
+@keyframes prontoIn{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){.pronto-line{animation:none}}
 
 /* ── RSVP ── */
 #rsvp{background:var(--black);padding:5rem 2rem;position:relative;overflow:hidden}
@@ -713,20 +710,12 @@ footer p{font-family:var(--ff-ui);font-size:.68rem;color:var(--sage);letter-spac
         <img src="Ellas8.jpeg" alt="Look" onclick="openLb(this.src)">
       </div>
     </div>
+
+    <p class="pronto-line" data-i18n="pronto.line">Aún queda tiempo por delante. Seguimos ultimando algunos detalles y os iremos avisando en cuanto haya novedades.</p>
   </div>
 </section>
 
 <!-- dc popup removed - gallery is inline -->
-
-<!-- ── AVISO / PRÓXIMAMENTE ── -->
-<section id="pronto">
-  <div class="pronto-inner fi">
-    <span class="s-label" data-i18n="pronto.label">Estamos en ello</span>
-    <p class="pronto-lead" data-i18n="pronto.lead">Aún queda tiempo por delante</p>
-    <div class="rule-c"><div class="rl"></div><div class="dia"></div><div class="rl"></div></div>
-    <p class="pronto-sub" data-i18n="pronto.sub">Seguimos ultimando algunos detalles y os iremos avisando en cuanto haya novedades.</p>
-  </div>
-</section>
 
 <!-- Lightbox -->
 <div id="lb" onclick="closeLb()"><span id="lb-x" data-i18n="lb.close">✕ cerrar</span><img id="lb-img" src="" alt=""></div>
@@ -844,9 +833,7 @@ const TRANSLATIONS = {
     'dc.men.p':'Esmoquin negro clásico.<br>Pajarita negra.<br>Camisa blanca y zapatos negros.',
     'dc.men.note':'Si alquiláis el esmoquin en cualquier tienda <strong>Bon Vivant</strong>, tenéis un descuento de <strong>10€</strong> indicando «Boda Fer y Dani».',
     'dc.wilde':'Como recordaba Oscar Wilde: <em>«Uno debería estar siempre un poco demasiado bien vestido».</em>',
-    'pronto.label':'Estamos en ello',
-    'pronto.lead':'Aún queda tiempo por delante',
-    'pronto.sub':'Seguimos ultimando algunos detalles y os iremos avisando en cuanto haya novedades.',
+    'pronto.line':'Aún queda tiempo por delante. Seguimos ultimando algunos detalles y os iremos avisando en cuanto haya novedades.',
     'lb.close':'✕ cerrar',
     'rsvp.label':'¿Nos acompañas?',
     'rsvp.h2':'Confirma tu <em>asistencia</em>',
@@ -899,9 +886,7 @@ const TRANSLATIONS = {
     'dc.men.p':'Classic black tuxedo.<br>Black bow tie.<br>White shirt and black shoes.',
     'dc.men.note':'If you rent your tuxedo at any <strong>Bon Vivant</strong> store, you get a <strong>&euro;10</strong> discount by mentioning &laquo;Boda Fer y Dani&raquo;.',
     'dc.wilde':'As Oscar Wilde once said: <em>&laquo;One should always be a little improbable&raquo;.</em>',
-    'pronto.label':'In the works',
-    'pronto.lead':'There&rsquo;s still time ahead',
-    'pronto.sub':'We&rsquo;re still putting the final touches together and we&rsquo;ll keep you posted as soon as there&rsquo;s news.',
+    'pronto.line':'There&rsquo;s still time ahead. We&rsquo;re still putting the final touches together and we&rsquo;ll keep you posted as soon as there&rsquo;s news.',
     'lb.close':'✕ close',
     'rsvp.label':'Will you join us?',
     'rsvp.h2':'Confirm your <em>attendance</em>',
