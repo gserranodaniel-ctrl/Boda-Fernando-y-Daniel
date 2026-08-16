@@ -756,6 +756,7 @@ footer p{font-family:var(--ff-ui);font-size:.68rem;color:var(--sage);letter-spac
 gsap.registerPlugin(ScrollTrigger);
 const WEDDING=new Date(2027,4,28,18,30,0);
 const PWD='BodaF&D_2027';
+const RSVP_FORMS={es:'261023433093043',en:'262272648273361'};
 
 window.onload=()=>{
   document.getElementById('lp').addEventListener('keydown',e=>{if(e.key==='Enter')doLogin();});
@@ -891,7 +892,7 @@ const TRANSLATIONS = {
     'rsvp.label':'Will you join us?',
     'rsvp.h2':'Confirm your <em>attendance</em>',
     'rsvp.deadline':'Please confirm your attendance before <strong>April 1, 2027</strong>',
-    'rsvp.fallback':'Form not loading?<br><a href="https://form.jotform.com/261023433093043" target="_blank" rel="noopener">Open it in a new tab &rarr;</a>'
+    'rsvp.fallback':'Form not loading?<br><a href="https://form.jotform.com/262272648273361" target="_blank" rel="noopener">Open it in a new tab &rarr;</a>'
   }
 };
 
@@ -918,6 +919,7 @@ function applyTranslations(lang){
 function setLang(lang){
   currentLang = lang;
   applyTranslations(lang);
+  setRsvpForm(lang);
   try{ localStorage.setItem('boda_lang', lang); }catch(e){}
   const sw = document.getElementById('lang-switch');
   if(sw) sw.classList.remove('open');
@@ -940,7 +942,25 @@ function initLang(){
   applyTranslations(saved);
 }
 
+/* ── RSVP: formulario segun idioma ── */
+/* Cambia el iframe al formulario del idioma activo y reengancha el manejador
+   de JotForm (auto-ajuste de altura). Solo recarga el iframe si el src cambia,
+   asi que arrancar en espanol no provoca una recarga innecesaria. */
+function setRsvpForm(lang){
+  const iframe=document.querySelector('.jotform-wrap iframe');
+  if(!iframe)return;
+  const id=RSVP_FORMS[lang]||RSVP_FORMS.es;
+  const src='https://form.jotform.com/'+id;
+  if(iframe.getAttribute('src')!==src){
+    iframe.setAttribute('src',src);
+    iframe.id='JotFormIFrame-'+id;
+  }
+  const attach=()=>{if(window.jotformEmbedHandler){window.jotformEmbedHandler("iframe[id='JotFormIFrame-"+id+"']","https://form.jotform.com");}};
+  if(window.jotformEmbedHandler){attach();}else{setTimeout(attach,600);}
+}
+
 function boot(){
+  setRsvpForm(currentLang);
   initHeroVideo();
   initPhotoBanner('dc-track',62);
   initCursor();
