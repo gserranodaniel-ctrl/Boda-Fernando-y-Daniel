@@ -17,8 +17,8 @@
   --ff-ui:'Cormorant Garamond',Georgia,serif;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;font-size:17px;overflow-x:hidden;max-width:100%}
-body{font-family:var(--ff-eb);background:var(--off);color:var(--td);overflow-x:hidden;width:100%;max-width:100%;position:relative;cursor:none}
+html{scroll-behavior:smooth;font-size:17px;overflow-x:hidden;overflow-x:clip;max-width:100%}
+body{font-family:var(--ff-eb);background:var(--off);color:var(--td);overflow-x:hidden;overflow-x:clip;width:100%;max-width:100%;position:relative;cursor:none}
 img{display:block;max-width:100%}
 a{color:inherit;text-decoration:none}
 button{font-family:var(--ff-ui);cursor:none}
@@ -471,12 +471,15 @@ footer p{font-family:var(--ff-ui);font-size:.68rem;color:var(--sage);letter-spac
 
 /* ── BANNER de fotos a todo el ancho (tipo marquesina) ── */
 .photo-banner{
-  width:100vw;position:relative;left:50%;margin-left:-50vw;
+  /* full-bleed robusto: ancho = contenedor + margenes negativos hasta el borde
+     de la ventana. Sin 100vw ni left:50%, que en iOS permiten arrastre lateral. */
+  width:auto;
+  margin-left:calc(50% - 50vw);
+  margin-right:calc(50% - 50vw);
   overflow:hidden;background:var(--dkgreen);
   border-top:1px solid rgba(196,164,74,.22);
   border-bottom:1px solid rgba(196,164,74,.22);
-  /* OJO: nunca usar el atajo 'margin' aqui, anularia el margin-left:-50vw */
-  margin-top:4vh;margin-bottom:4vh;margin-right:0;
+  margin-top:4vh;margin-bottom:4vh;
   height:clamp(215px,26vw,340px);  /* franja alta */
   /* line-height/font-size a 0: elimina el hueco de baseline bajo las fotos */
   line-height:0;font-size:0;
